@@ -2,11 +2,16 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Languages } from 'lucide-react';
 
-export default function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  onLanguageChange: (language: string) => void;
+}
+
+export default function LanguageSwitcher({ onLanguageChange }: LanguageSwitcherProps) {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+    onLanguageChange(lng);
   };
 
   return (

@@ -497,5 +497,76 @@ export default {
     { vertical: 'Bedding', preApi: '0.63', postApi: '0.48', reduction: '24%' },
     { vertical: 'Furniture-Bedroom', preApi: '0.53', postApi: '0.22', reduction: '58%' },
     { vertical: 'Furniture-Kitchen', preApi: '0.95', postApi: '0.21', reduction: '78%' }
-  ]
+  ],
+  multiChannelOrder: {
+    title: "Multi-Channel Order API Overview",
+    description:
+      "When you integrate with our Multi-Channel API, you'll unlock the ability to create Multi-Channel orders designated for fulfillment by CastleGate. You will have the capability to retrieve detailed information including real-time order status updates and item-level tracking data.",
+    wsaInfo:
+      "This is made possible through our new warehouse shipping advices (WSAs), ensuring you're always informed when your items are shipped.",
+  },
+  workflowOverview: {
+    title: "Workflow Overview",
+    description:
+      "To initiate or retrieve requests, utilize the Multi-Channel Order GraphQL API. Here's an example of how you can interact with Wayfair MC APIs, illustrated in the flow chart below.",
+    flowChartAlt1: "Representation of a potential workflow utilizing Wayfair IDs for the creation and management of specific orders",
+    flowChartUrl1:
+      "http://images.ctfassets.net/2l5cek30pgdd/6vd9J0evTxDk9tmvPyxGBn/a5b845609d5aaf3aa1ac25cef07a6b86/Screenshot_2024-05-14_at_10.29.36_AM.png",
+    diagramDescription1:
+      "Workflow Example Diagram 1: Representation of a potential workflow utilizing Wayfair IDs for the creation and management of specific orders.",
+    flowChartAlt2: "Illustration of a potential workflow involving job-based API polling to retrieve order status and order item WSAs within specified date ranges",
+    flowChartUrl2:
+      "http://images.ctfassets.net/2l5cek30pgdd/1LPnvKsTr3rwWV3DYrehfq/a8a4ceec15f4e65ec957521f26b5063a/Screenshot_2024-05-14_at_10.29.25_AM.png",
+    diagramDescription2:
+      "Workflow Example Diagram 2: Illustration of a potential workflow involving job-based API polling to retrieve order status and order item WSAs within specified date ranges.",
+  },
+  walkthrough: {
+    title: "Step-by-Step Walkthrough",
+    step1: {
+      title: "Submit Multi-Channel Order Create Request",
+      description:
+        "Request a Multi-Channel order to be created through the 'createFulfillmentOrder' mutation (see example in GraphQL docs).",
+    },
+    step2: {
+      title: "Handle Multi-Channel Order Create Response",
+      success: {
+        title: "Success Response",
+        description:
+          "Upon a successful request, you will receive a synchronous response indicating whether the request was accepted or failed. It's important to note that while the order request has undergone syntax and semantic validations, this does not guarantee successful fulfillment. Step 3 will determine if the order can or will be fulfilled. The response, as illustrated in the GraphQL documentation example, will be error-free and will include a fulfillmentOrderRequestId. As a supplier, it's essential to retain this ID for tracking purposes regarding the API MC order create request.",
+      },
+      failure: {
+        title: "Failure Response",
+        description:
+          "The order request has undergone syntax and/or semantic validations resulting in failure, indicating that the order cannot be fulfilled due to errors in the provided data. For further context, refer to the errors object in the response. Make the required corrections and proceed to repeat Step 1.",
+      },
+    },
+    step3: {
+      title: "Check MC Order and Item Status",
+      option1: {
+        title: "Option 1",
+        description:
+          "You can utilize the fulfillmentOrderDetails query with the fulfillmentOrderRequestId obtained from the first step to verify the status of a single order or the status of any specific item contained within the order.",
+      },
+      option2: {
+        title: "Option 2",
+        description:
+          "Alternatively, Option 2 allows you to use the fulfillmentOrderDetailsList query to obtain the current status of a selection of orders filtered by various criteria, such as a list of fulfillmentOrderRequestIds, date ranges (including order creation date, shipping date, and estimated shipping date), and order statuses.",
+      },
+    },
+    step4: {
+      title: "Handle Order Status Response",
+      description:
+        "Upon reviewing the order status, indicated in the fulfillmentOrder.status field from the previous step, you can decide on the appropriate course of action. For instance, if the order is not yet completed (i.e., not marked as SHIPPED), feel free to continue checking the order status. Alternatively, if the status shows as REJECTED, you may need to address any order errors identified in the first step.",
+    },
+    step5: {
+      title: "Handle Item Status Response",
+      description:
+        "Upon reviewing the order status, indicated in the fulfillmentOrder.status field mentioned in step 3, you will be able to see additional details for each item within the order by reviewing the item status, indicated in the FulfillmentOrderItem.status field. If the status shows as REJECTED, you will then see the reason why indicated in the FulfillmentOrderItem.failureReasons field. You can decide on the appropriate course of action upon reviewing these details.",
+    },
+    step6: {
+      title: "Poll for Warehouse Shipping Advices (WSAs)",
+      description:
+        "You can perform this task asynchronously from the steps outlined earlier. Feel free to periodically check for warehouse shipping advices (WSAs) related to items in your orders using the warehouseShippingAdvices query.",
+    },
+  },
 };

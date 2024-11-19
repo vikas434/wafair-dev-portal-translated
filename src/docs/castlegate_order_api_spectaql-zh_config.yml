@@ -1,0 +1,19 @@
+introspection:
+  schemaFile:
+  - src/schemas/schema.graphqls
+  - src/schemas/castlegate-order-api-schema-zh.graphqls
+  metadataFile: src/docs/metadata-zh.json
+
+servers:
+- url: https://api.wayfair.io/v1/supplier-order-api/graphql
+  description: CastleGate 多渠道订单 API
+  production: true
+
+info:
+  title: CastleGate 多渠道订单 API
+  description: 为供应商的 CastleGate 多渠道订单需求提供的 GraphQL API。
+  termsOfService: https://terms.wayfair.io
+  contact: {}
+  x-introItems: {}
+
+outputDir: public/zh

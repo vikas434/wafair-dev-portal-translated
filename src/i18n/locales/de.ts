@@ -497,5 +497,76 @@ export default {
     { vertical: 'Bettwäsche', preApi: '0.63', postApi: '0.48', reduction: '24%' },
     { vertical: 'Möbel-Schlafzimmer', preApi: '0.53', postApi: '0.22', reduction: '58%' },
     { vertical: 'Möbel-Küche', preApi: '0.95', postApi: '0.21', reduction: '78%' }
-  ]
+  ],
+  multiChannelOrder: {
+    title: "Überblick über die Multi-Channel-Bestell-API",
+    description:
+      "Wenn Sie sich in unsere Multi-Channel-API integrieren, erhalten Sie die Möglichkeit, Multi-Channel-Bestellungen zu erstellen, die für die Erfüllung durch CastleGate vorgesehen sind. Sie haben die Fähigkeit, detaillierte Informationen abzurufen, einschließlich Echtzeit-Bestellstatus-Updates und Tracking-Daten auf Artikelebene.",
+    wsaInfo:
+      "Dies wird durch unsere neuen Versandavis (WSAs) ermöglicht, die sicherstellen, dass Sie immer informiert sind, wenn Ihre Artikel versendet werden.",
+  },
+  workflowOverview: {
+    title: "Workflow-Übersicht",
+    description:
+      "Um Anfragen zu initiieren oder abzurufen, nutzen Sie die Multi-Channel Order GraphQL API. Hier ist ein Beispiel dafür, wie Sie mit Wayfair MC APIs interagieren können, illustriert im unten stehenden Flussdiagramm.",
+    flowChartAlt1: "Darstellung eines möglichen Workflows, der Wayfair-IDs für die Erstellung und Verwaltung spezifischer Bestellungen verwendet",
+    flowChartUrl1:
+      "http://images.ctfassets.net/2l5cek30pgdd/6vd9J0evTxDk9tmvPyxGBn/a5b845609d5aaf3aa1ac25cef07a6b86/Screenshot_2024-05-14_at_10.29.36_AM.png",
+    diagramDescription1:
+      "Workflow-Beispieldiagramm 1: Darstellung eines möglichen Workflows, der Wayfair-IDs für die Erstellung und Verwaltung spezifischer Bestellungen verwendet.",
+    flowChartAlt2: "Darstellung eines möglichen Workflows, der auf Job-basierte API-Abfragen zur Abfrage des Bestellstatus und der WSAs von Bestellpositionen in bestimmten Datumsbereichen zurückgreift",
+    flowChartUrl2:
+      "http://images.ctfassets.net/2l5cek30pgdd/1LPnvKsTr3rwWV3DYrehfq/a8a4ceec15f4e65ec957521f26b5063a/Screenshot_2024-05-14_at_10.29.25_AM.png",
+    diagramDescription2:
+      "Workflow-Beispieldiagramm 2: Darstellung eines möglichen Workflows, der auf Job-basierte API-Abfragen zur Abfrage des Bestellstatus und der WSAs von Bestellpositionen in bestimmten Datumsbereichen zurückgreift.",
+  },
+  walkthrough: {
+    title: "Schritt-für-Schritt-Anleitung",
+    step1: {
+      title: "Anfrage zur Erstellung einer Multi-Channel-Bestellung senden",
+      description:
+        "Fordern Sie an, dass eine Multi-Channel-Bestellung über die 'createFulfillmentOrder'-Mutation erstellt wird (siehe Beispiel in den GraphQL-Dokumenten).",
+    },
+    step2: {
+      title: "Antwort auf die Anfrage zur Erstellung einer Multi-Channel-Bestellung bearbeiten",
+      success: {
+        title: "Erfolgreiche Antwort",
+        description:
+          "Nach einer erfolgreichen Anfrage erhalten Sie eine synchronisierte Antwort, die angibt, ob die Anfrage akzeptiert oder abgelehnt wurde. Es ist wichtig zu beachten, dass, obwohl die Anfrage Syntax- und Semantiküberprüfungen bestanden hat, dies keine erfolgreiche Erfüllung garantiert. Schritt 3 bestimmt, ob die Bestellung erfüllt werden kann oder wird. Die Antwort, wie im GraphQL-Dokumentationsbeispiel dargestellt, wird fehlerfrei sein und eine fulfillmentOrderRequestId enthalten. Als Lieferant ist es wichtig, diese ID zur Nachverfolgung der API MC-Bestellanfrage aufzubewahren.",
+      },
+      failure: {
+        title: "Fehlerhafte Antwort",
+        description:
+          "Die Anfrage hat Syntax- und/oder Semantiküberprüfungen nicht bestanden, was auf Fehler in den bereitgestellten Daten hinweist. Weitere Informationen finden Sie im Fehlerobjekt in der Antwort. Nehmen Sie die erforderlichen Korrekturen vor und wiederholen Sie Schritt 1.",
+      },
+    },
+    step3: {
+      title: "MC-Bestell- und Artikelstatus überprüfen",
+      option1: {
+        title: "Option 1",
+        description:
+          "Sie können die fulfillmentOrderDetails-Abfrage verwenden, um den Status einer einzelnen Bestellung oder eines bestimmten Artikels in der Bestellung zu überprüfen.",
+      },
+      option2: {
+        title: "Option 2",
+        description:
+          "Alternativ können Sie die fulfillmentOrderDetailsList-Abfrage verwenden, um den aktuellen Status einer Auswahl von Bestellungen zu erhalten, die nach verschiedenen Kriterien gefiltert sind, wie z. B. eine Liste von fulfillmentOrderRequestIds, Datumsbereiche und Bestellstatus.",
+      },
+    },
+    step4: {
+      title: "Antwort auf den Bestellstatus bearbeiten",
+      description:
+        "Überprüfen Sie den Bestellstatus, der im fulfillmentOrder.status-Feld angegeben ist, und entscheiden Sie sich für die geeignete Vorgehensweise. Wenn die Bestellung beispielsweise nicht abgeschlossen ist (d. h. nicht als VERSENDET markiert), prüfen Sie den Status weiter. Wenn der Status jedoch als ABGELEHNT angezeigt wird, müssen Sie möglicherweise Fehler aus Schritt 1 beheben.",
+    },
+    step5: {
+      title: "Antwort auf den Artikelstatus bearbeiten",
+      description:
+        "Überprüfen Sie den Artikelstatus im Feld FulfillmentOrderItem.status. Wenn der Status ABGELEHNT ist, überprüfen Sie das Feld FulfillmentOrderItem.failureReasons, um die Gründe zu erfahren, und treffen Sie die erforderlichen Entscheidungen.",
+    },
+    step6: {
+      title: "Abfragen von Versandavis für Lagerhäuser (WSAs)",
+      description:
+        "Diese Aufgabe kann asynchron von den oben genannten Schritten durchgeführt werden. Überprüfen Sie regelmäßig Versandavis für Artikel in Ihren Bestellungen über die warehouseShippingAdvices-Abfrage.",
+    },
+  },
 };

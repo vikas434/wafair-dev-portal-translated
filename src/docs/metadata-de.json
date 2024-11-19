@@ -1,0 +1,33 @@
+{
+    "OBJECT": {
+      "Query": {
+        "fields": {
+          "fulfillmentOrderDetails": {
+            "documentation": {
+              "description": "Gibt Bestellinformationen einschließlich Status für die Multi-Channel-Bestellung eines bestimmten Lieferanten zurück."
+            }
+          },
+          "warehouseShippingAdvices": {
+            "documentation": {
+              "description": "Gibt eine paginierte Liste von Versandhinweisen zurück, die Artikel anzeigen, die für eine Bestellabwicklung versendet werden."
+            }
+          },
+          "fulfillmentOrderDetailsList": {
+            "documentation": {
+              "description": "Gibt eine paginierte Liste mit Bestellinformationen und aktuellen Status eines bestimmten Lieferanten zurück."
+            }
+          }
+        }
+      },
+      "Mutation": {
+        "fields": {
+          "createFulfillmentOrder": {
+            "documentation": {
+              "description": "Erstellt eine Multi-Channel-Bestellung für einen bestimmten Lieferanten."
+            }
+          }
+        }
+      }
+    }
+  }
+  

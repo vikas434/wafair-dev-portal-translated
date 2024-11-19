@@ -1,0 +1,19 @@
+introspection:
+  schemaFile:
+  - src/schemas/schema.graphqls
+  - src/schemas/castlegate-order-api-schema-en.graphqls
+  metadataFile: src/docs/metadata-en.json
+
+servers:
+- url: https://api.wayfair.io/v1/supplier-order-api/graphql
+  description: CastleGate Multi-Channel Order API
+  production: true
+
+info:
+  title: CastleGate Multi-Channel Order API
+  description: GraphQL API serving suppliers' CastleGate Multi-Channel order needs.
+  termsOfService: https://terms.wayfair.io
+  contact: {}
+  x-introItems: {}
+
+outputDir: public/en

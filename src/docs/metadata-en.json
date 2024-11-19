@@ -1,0 +1,32 @@
+{
+    "OBJECT": {
+      "Query": {
+        "fields": {
+          "fulfillmentOrderDetails": {
+            "documentation": {
+              "description": "Returns order information including status for a given supplier's multi-channel fulfillment order."
+            }
+          },
+          "warehouseShippingAdvices": {
+            "documentation": {
+              "description": "Returns a paginated list of Warehouse Shipping Advices, indicating items being shipped for a fulfillment order."
+            }
+          },
+          "fulfillmentOrderDetailsList": {
+            "documentation": {
+              "description": "Returns a paginated list of order information and current statuses of a given supplier."
+            }
+          }
+        }
+      },
+      "Mutation": {
+        "fields": {
+          "createFulfillmentOrder": {
+            "documentation": {
+              "description": "Creates a Multi-Channel Fulfillment order for a given supplier."
+            }
+          }
+        }
+      }
+    }
+  }  

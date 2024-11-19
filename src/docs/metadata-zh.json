@@ -1,0 +1,33 @@
+{
+    "OBJECT": {
+      "Query": {
+        "fields": {
+          "fulfillmentOrderDetails": {
+            "documentation": {
+              "description": "返回给定供应商的多渠道履行订单的订单信息，包括状态。"
+            }
+          },
+          "warehouseShippingAdvices": {
+            "documentation": {
+              "description": "返回分页的仓库运输建议列表，指示履行订单中正在运输的项目。"
+            }
+          },
+          "fulfillmentOrderDetailsList": {
+            "documentation": {
+              "description": "返回指定供应商的订单信息及其当前状态的分页列表。"
+            }
+          }
+        }
+      },
+      "Mutation": {
+        "fields": {
+          "createFulfillmentOrder": {
+            "documentation": {
+              "description": "为指定的供应商创建一个多渠道履行订单。"
+            }
+          }
+        }
+      }
+    }
+  }
+  

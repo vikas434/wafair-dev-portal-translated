@@ -491,5 +491,76 @@ export default {
     { vertical: '床上用品', preApi: '0.63', postApi: '0.48', reduction: '24%' },
     { vertical: '家具-卧室', preApi: '0.53', postApi: '0.22', reduction: '58%' },
     { vertical: '家具-厨房', preApi: '0.95', postApi: '0.21', reduction: '78%' }
-  ]
+  ],
+  multiChannelOrder: {
+    title: "多渠道订单API概览",
+    description:
+      "当您集成我们的多渠道API时，您将解锁创建由CastleGate履行的多渠道订单的能力。您将能够获取详细信息，包括实时订单状态更新和项目级跟踪数据。",
+    wsaInfo:
+      "这通过我们的新仓库发货通知（WSA）实现，确保您始终了解您的商品何时发货。",
+  },
+  workflowOverview: {
+    title: "工作流程概览",
+    description:
+      "要发起或检索请求，请使用多渠道订单GraphQL API。下面的流程图展示了您如何与Wayfair MC API交互的示例。",
+    flowChartAlt1: "利用Wayfair ID创建和管理特定订单的潜在工作流程的表示",
+    flowChartUrl1:
+      "http://images.ctfassets.net/2l5cek30pgdd/6vd9J0evTxDk9tmvPyxGBn/a5b845609d5aaf3aa1ac25cef07a6b86/Screenshot_2024-05-14_at_10.29.36_AM.png",
+    diagramDescription1:
+      "工作流程示例图1：利用Wayfair ID创建和管理特定订单的潜在工作流程的表示。",
+    flowChartAlt2: "潜在工作流程的示意图，包括基于作业的API轮询以在指定日期范围内检索订单状态和订单项WSA",
+    flowChartUrl2:
+      "http://images.ctfassets.net/2l5cek30pgdd/1LPnvKsTr3rwWV3DYrehfq/a8a4ceec15f4e65ec957521f26b5063a/Screenshot_2024-05-14_at_10.29.25_AM.png",
+    diagramDescription2:
+      "工作流程示例图2：潜在工作流程的示意图，包括基于作业的API轮询以在指定日期范围内检索订单状态和订单项WSA。",
+  },
+  walkthrough: {
+    title: "逐步指南",
+    step1: {
+      title: "提交多渠道订单创建请求",
+      description:
+        "通过 'createFulfillmentOrder' 变更请求创建多渠道订单（请参阅 GraphQL 文档中的示例）。",
+    },
+    step2: {
+      title: "处理多渠道订单创建响应",
+      success: {
+        title: "成功响应",
+        description:
+          "在请求成功后，您将收到一个同步响应，指示请求是否被接受或失败。需要注意的是，尽管订单请求已通过语法和语义验证，但这并不保证成功履行。第 3 步将确定订单是否可以或将被履行。响应将包含 fulfillmentOrderRequestId，用于跟踪 API 多渠道订单创建请求。",
+      },
+      failure: {
+        title: "失败响应",
+        description:
+          "订单请求未通过语法和/或语义验证，导致失败，表明订单由于所提供数据中的错误而无法履行。请参考响应中的错误对象，进行必要的更正并重复第 1 步。",
+      },
+    },
+    step3: {
+      title: "检查多渠道订单和项目状态",
+      option1: {
+        title: "选项 1",
+        description:
+          "您可以使用 fulfillmentOrderDetails 查询，通过从第一步中获得的 fulfillmentOrderRequestId 验证单个订单的状态或订单中任何特定项目的状态。",
+      },
+      option2: {
+        title: "选项 2",
+        description:
+          "或者，选项 2 允许您使用 fulfillmentOrderDetailsList 查询获取订单选择的当前状态，这些订单按各种条件筛选，例如 fulfillmentOrderRequestIds 列表、日期范围和订单状态。",
+      },
+    },
+    step4: {
+      title: "处理订单状态响应",
+      description:
+        "根据 fulfillmentOrder.status 字段中显示的订单状态，决定适当的操作。 如果订单尚未完成（即未标记为已发货），请继续检查订单状态。如果状态显示为拒绝，请解决第 1 步中发现的任何订单错误。",
+    },
+    step5: {
+      title: "处理项目状态响应",
+      description:
+        "检查 FulfillmentOrderItem.status 字段中显示的项目状态。 如果状态显示为拒绝，请查看 FulfillmentOrderItem.failureReasons 字段中的原因，并根据这些详细信息采取适当的行动。",
+    },
+    step6: {
+      title: "轮询仓库运输通知 (WSA)",
+      description:
+        "此任务可以与前面概述的步骤异步执行。您可以定期使用 warehouseShippingAdvices 查询检查与您的订单中项目相关的仓库运输通知。",
+    },
+  },
 };

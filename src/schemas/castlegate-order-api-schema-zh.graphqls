@@ -1,0 +1,595 @@
+extend type Query {
+    """
+    返回有关供应商的多渠道履行订单的信息，包括订单状态。
+    """
+    fulfillmentOrderDetails(orderDetailsInput: FulfillmentOrderDetailsInput!): FulfillmentOrderDetails
+
+    """
+    返回一个分页的仓库发货建议列表，每个建议指示多渠道履行订单的某个物品正在发货，并包含跟踪信息。
+    """
+    warehouseShippingAdvices(warehouseShippingAdviceInput: WarehouseShippingAdviceInput!): WarehouseShippingAdvicePagedConnection!
+
+    """
+    返回供应商的订单信息及其当前状态的分页列表。
+    """
+    fulfillmentOrderDetailsList(orderDetailsListInput: FulfillmentOrderDetailsListInput!): FulfillmentOrderDetailsPagedConnection!
+}
+
+extend type Mutation {
+    """
+    创建一个多渠道履行订单。
+    """
+    createFulfillmentOrder(fulfillmentOrderInput: CreateFulfillmentOrderInput!): CreateFulfillmentOrderResponse!
+}
+
+"""
+创建多渠道履行订单的输入类型
+"""
+input CreateFulfillmentOrderInput {
+    """
+    与卖方（供应商）的履行订单关联的唯一 ID。
+    sellerFulfillmentOrderId 必须对每个履行订单唯一，以确保意外的重复请求不会创建重复订单。
+    """
+    sellerFulfillmentOrderId: String
+    "订单的账单地址（如需要）"
+    billingAddress: FulfillmentOrderBillingAddressInput
+    "订单相关的客户信息"
+    customer: FulfillmentOrderCustomerInput!
+    "包含在履行订单中的物品列表"
+    items: [FulfillmentOrderItemInput!]!
+    "订单相关的零售商信息"
+    retailer: FulfillmentOrderRetailerInput!
+    "收件人的送货地址"
+    shippingAddress: FulfillmentOrderShippingAddressInput!
+    "订单的运输详情"
+    shippingDetails: FulfillmentOrderShippingDetailsInput!
+    "订单的 Wayfair 供应商标识符"
+    supplierId: Int!
+}
+
+"""
+多渠道履行订单创建请求的账单地址输入类型
+"""
+input FulfillmentOrderBillingAddressInput {
+    "此地址下的个人、企业或机构的姓名"
+    name: String!
+    "地址的第一行"
+    address1: String!
+    "地址的第二行（如果需要）"
+    address2: String
+    "个人、企业或机构所在的城市"
+    city: String!
+    """
+    个人、企业或机构所在的州或地区的简写名称。
+    如果是 'US'（美国）地址，则必填。例如："MA" 表示马萨诸塞州。
+    """
+    stateShortName: String
+    "地址的邮政编码"
+    postalCode: String!
+    """
+    个人、企业或机构所在国家的简写名称（代码）。
+    例如："US" 表示美国。
+    """
+    countryShortName: String!
+}
+
+"""
+多渠道履行订单的客户输入类型
+"""
+input FulfillmentOrderCustomerInput {
+    "客户订单号"
+    orderNumber: String!
+}
+
+"""
+多渠道履行订单创建请求中的物品输入类型
+"""
+input FulfillmentOrderItemInput {
+    "产品的供应商名称"
+    supplierProductName: String
+    "供应商的零件号"
+    supplierPartNumber: String!
+    "订单中该物品的数量"
+    quantity: Int!
+    """
+    供应商选择的履行仓库 ID。
+    这是一个可选字段。
+    请选择以下有效仓库 ID：
+
+    | ID | 名称                       | 国家 |
+    |----|----------------------------|------|
+    | 9  | Perris 大包裹仓库          | US   |
+    | 10 | Erlanger                   | US   |
+    | 13 | Cranbury 小包裹仓库        | US   |
+    | 17 | McDonough                  | US   |
+    | 18 | Perris 小包裹仓库          | US   |
+    | 22 | Florence                   | US   |
+    | 23 | Cranbury 大包裹仓库        | US   |
+    | 24 | Lancaster                  | US   |
+    | 25 | Port Wentworth (Savannah)  | US   |
+    | 26 | Lathrop                   | US   |
+    | 28 | Jacksonville              | US   |
+    | 35 | Aberdeen                  | US   |
+    | 42 | Romeoville                | US   |
+    | 27 | 英国 - Mallow              | UK   |
+    | 33 | 德国 - Lich                | DE   |
+    | 21 | 加拿大 - Mississauga       | CAN  |
+    | 45 | 加拿大 - Richmond          | CAN  |
+    """
+    fulfillmentWarehouseId: Int
+}
+
+"""
+多渠道履行订单创建请求的零售商输入类型
+"""
+input FulfillmentOrderRetailerInput {
+    "零售商的标识符"
+    retailerId: Int!
+    "零售商的订单号"
+    orderNumber: String!
+}
+
+"""
+多渠道履行订单创建请求的送货地址输入类型
+"""
+input FulfillmentOrderShippingAddressInput {
+    "此地址下的个人、企业或机构的姓名"
+    name: String!
+    "地址的第一行"
+    address1: String!
+    "地址的第二行（如果需要）"
+    address2: String
+    "个人、企业或机构所在的城市"
+    city: String!
+    """
+    个人、企业或机构所在的州或地区的简写名称。
+    如果是 'US'（美国）地址，则必填。
+    """
+    stateShortName: String
+    "地址的邮政编码"
+    postalCode: String!
+    """
+    个人、企业或机构所在国家的简写名称（代码）。
+    例如："US" 表示美国。
+    """
+    countryShortName: String!
+    "此地址下的个人、企业或机构的电话号码"
+    phoneNumber: String
+    "此地址下的公司名称（如适用）"
+    companyName: String
+}
+
+"""
+多渠道履行订单创建请求的运输详情输入类型
+"""
+input FulfillmentOrderShippingDetailsInput {
+    """
+    用于履行订单的运输账号
+    """
+    shippingAccountNumber: String
+    """
+    用于识别运输公司的标准承运人代码
+    """
+    carrierScac: String
+    "用于履行订单的运输速度代码"
+    shipSpeedCode: String
+}
+
+"""
+创建履行订单请求的响应类型
+"""
+type CreateFulfillmentOrderResponse {
+    """
+    创建履行订单请求的标识符。
+    该标识符用于在 fulfillmentOrderDetails 查询中获取订单。
+    """
+    fulfillmentOrderRequestId: String
+    "创建履行订单请求的状态"
+    requestStatus: CreateFulfillmentOrderRequestStatus!
+    "可选的错误列表，详述导致请求失败或被拒绝的错误"
+    errors: [CreateFulfillmentOrderRequestError!]
+}
+
+"""
+多渠道履行订单创建请求的状态
+"""
+enum CreateFulfillmentOrderRequestStatus {
+    "履行订单创建请求已成功接受并将被处理。"
+    ACCEPTED
+    "履行订单创建请求失败并由于错误被拒绝，请参阅错误详情。"
+    FAILURE
+}
+
+"""
+描述多渠道履行订单请求失败条件的错误对象
+"""
+type CreateFulfillmentOrderRequestError {
+    "履行订单失败条件的错误代码"
+    code: String
+    "描述失败条件的错误消息"
+    message: String
+    "出现错误的字段"
+    field: String
+    "出现错误的字段值"
+    value: String
+}
+
+"""
+多渠道履行订单详细信息请求的输入类型
+"""
+input FulfillmentOrderDetailsInput {
+    "订单的 Wayfair 供应商标识符"
+    supplierId: Int!
+    "从成功的 createFulfillmentOrder 操作返回的标识符"
+    fulfillmentOrderRequestId: String!
+}
+
+"""
+包含履行订单静态详细信息、状态以及使订单无法履行的可选错误列表
+"""
+type FulfillmentOrderDetails {
+    "关于履行订单的信息"
+    fulfillmentOrder: FulfillmentOrder!
+    """
+    可选的错误列表，描述在 createFulfillmentOrder 接受后使订单无法履行的错误。
+    """
+    fulfillmentOrderErrors: [FulfillmentOrderError!]
+}
+
+"""
+关于多渠道履行订单的常规信息，包括其状态。
+"""
+type FulfillmentOrder {
+    "从成功的 createFulfillmentOrder 操作返回的标识符，用于标识此订单。"
+    requestId: String!
+    """
+    履行订单的状态。<br>
+    <br><b>PENDING</b>: 订单请求已成功接收（通过语法和语义验证）。
+    <br><b>NEW</b>: 订单已成功确认并在 Wayfair 的 CastleGate 履行系统中创建，但可能仍需通过某些履行验证检查。
+    <br><b>ALLOCATED</b>: 履行订单已通过验证。订单的所有物品均已从库存中分配。如果订单中有一个物品尚未分配，则订单状态将保持为 NEW，直到所有物品都已分配。
+    <br><b>PARTIALLY_SHIPPED</b>: 订单中的部分物品已发货。
+    <br><b>SHIPPED</b>: 订单中的所有物品已发货。
+    <br><b>REJECTED</b>: 订单由于某些错误被拒绝。错误详细信息可以通过 `fulfillmentOrderDetails` 或 `fulfillmentOrderDetailsList` 查询查看 `FulfillmentOrderDetails` 类型。
+    <br><b>ON_HOLD</b>: 订单已被暂挂。
+    <br><b>CANCELLED</b>: 订单已被取消。
+    """
+    status: String!
+    "Wayfair 接受订单请求的日期和时间。"
+    orderDate: DateTime
+    "客户订单号，由 createFulfillmentOrder 操作提交。"
+    customerOrderNumber: String
+    "此履行订单的零售商信息。"
+    retailer: FulfillmentOrderRetailer
+    "由 createFulfillmentOrder 操作提交的送货地址。"
+    shippingAddress: FulfillmentOrderShippingAddress
+    "履行订单中包含的物品详细信息列表。"
+    fulfillmentOrderItems: [FulfillmentOrderItem!]
+}
+
+"""
+履行订单零售商相关信息。
+"""
+type FulfillmentOrderRetailer {
+    "零售商的名称"
+    name: String
+    "零售商的标识符"
+    retailerId: String
+    "零售商的订单号"
+    orderNumber: String
+}
+
+"""
+多渠道履行订单的送货（目的地）地址。
+"""
+type FulfillmentOrderShippingAddress {
+    "此地址下的个人、企业或机构的姓名。"
+    name: String
+    "地址的第一行。"
+    address1: String
+    "地址的第二行（如果需要）。"
+    address2: String
+    "个人、企业或机构所在的城市。"
+    city: String
+    "个人、企业或机构所在的州或地区的简写名称。"
+    stateShortName: String
+    "地址的邮政编码。"
+    postalCode: String
+    """
+    个人、企业或机构所在国家的简写名称（代码）。
+    例如："US" 表示美国。
+    """
+    countryShortName: String
+    "此地址的公司名称（如适用）。"
+    companyName: String
+}
+
+"""
+履行订单中物品的信息。
+"""
+type FulfillmentOrderItem {
+    """
+    Wayfair 履行订单中特定物品的标识符。
+    在订单处于 PENDING 或 REJECTED 状态时，可能不存在此字段。
+    """
+    fulfillmentOrderItemId: String
+    "库存产品 ID。"
+    productId: String
+    "制造商的产品编号。"
+    partNumber: String
+    "供应商的产品名称。"
+    supplierProductName: String
+    "供应商的产品编号。"
+    supplierPartNumber: String
+    "物品的当前状态。"
+    status: String
+    "物品履行失败的原因。"
+    failureReasons: [String]
+    "订单中该物品的数量。"
+    quantityOrdered: Int
+    "已发货的物品数量。"
+    quantityShipped: Int
+    "物品的选项。"
+    option: String
+    "应用于产品的强制数量倍数。"
+    forcedQuantityMultiplier: Float
+    "单个产品的价格。"
+    unitPrice: Float
+}
+
+"""
+描述多渠道履行订单失败条件的错误对象。
+"""
+type FulfillmentOrderError {
+    "失败条件的错误代码。"
+    code: String
+    "描述失败条件的错误消息。"
+    message: String
+    "发生错误的字段。"
+    field: String
+    "发生错误的字段值。"
+    value: String
+}
+
+"""
+仓库发货建议的输入类型。
+"""
+input WarehouseShippingAdviceInput {
+    "履行订单的物品 ID 列表。"
+    fulfillmentOrderItemIds: [String!]
+    "订单的 Wayfair 供应商标识符。"
+    supplierId: Int!
+    "用于获取发货建议的日期区间。"
+    warehouseShippingAdviceDateInterval: FulfillmentOrderDateInterval @DateInterval(
+        message: "无效的 warehouseShippingAdviceDateInterval。字段 'to' 的值：${validatedValue.to} 必须晚于字段 'from' 的值：${validatedValue.from}"
+    )
+    "发货建议的排序选项。"
+    sortOption: WarehouseShippingAdviceSortOption
+    "每页的条目数量。"
+    pageSize: Int = 50 @Range(min: 1, max: 100)
+    "页码索引。"
+    page: Int = 1 @Range(min: 1)
+}
+
+"""
+仓库发货建议的排序选项输入类型。
+"""
+input WarehouseShippingAdviceSortOption {
+    "排序字段。"
+    sortBy: WarehouseShippingAdviceSortBy! = WAREHOUSE_SHIPPING_ADVICE_DATE
+    "排序顺序。"
+    sortOrder: OrderFulfillmentSortOrder! = DESC
+}
+
+"""
+仓库发货建议的可用排序字段枚举。
+"""
+enum WarehouseShippingAdviceSortBy {
+    "按发货建议日期排序。"
+    WAREHOUSE_SHIPPING_ADVICE_DATE
+}
+
+"""
+履行订单的排序选项枚举。
+"""
+enum OrderFulfillmentSortOrder {
+    "升序排序。"
+    ASC
+    "降序排序。"
+    DESC
+}
+
+"""
+包含发货建议的分页信息。
+"""
+type WarehouseShippingAdvicePagedConnection {
+    "分页信息。"
+    pageInfo: FulfillmentDataPageInfo
+    "发货建议的节点列表。"
+    nodes: [WarehouseShippingAdvice!]!
+}
+
+"""
+包含分页数据的信息。
+"""
+type FulfillmentDataPageInfo {
+    "是否存在下一页。"
+    hasNextPage: Boolean!
+    "是否存在上一页。"
+    hasPreviousPage: Boolean!
+    "总页数。"
+    totalPages: Int!
+    "总条目数。"
+    totalItems: Int!
+}
+
+"""
+仓库发货建议 (WSA)，包括关于 CastleGate 订单物品的跟踪信息。
+"""
+type WarehouseShippingAdvice {
+    "订单物品 ID。"
+    fulfillmentOrderItemId: String!
+    "发货建议的日期和时间。"
+    warehouseShippingAdviceDate: DateTime
+    "由 createFulfillmentOrder 操作返回的订单请求 ID。"
+    fulfillmentOrderRequestId: String
+    "采购订单编号。"
+    fulfillmentPurchaseOrderNumber: String
+    "订单的供应商标识符。"
+    supplierId: Int
+    "订单的零售商信息。"
+    retailer: FulfillmentOrderRetailer!
+    "订单的产品详情。"
+    productDetails: FulfillmentOrderItem
+    "订单的运输详情。"
+    shippingDetails: FulfillmentOrderShippingDetails
+    "订单的跟踪详情。"
+    tracking: FulfillmentOrderTracking
+}
+
+"""
+履行订单的运输详情。
+"""
+type FulfillmentOrderShippingDetails {
+    "送货地址。"
+    shippingAddress: FulfillmentOrderShippingAddress
+    "发货地址。"
+    shippingFromAddress: FulfillmentOrderShippingAddress
+    "仓库信息。"
+    warehouse: FulfillmentOrderWarehouse
+}
+
+"""
+订单的跟踪详情。
+"""
+type FulfillmentOrderTracking {
+    "承运人名称。"
+    carrier: String
+    "用于标识运输公司的标准承运人代码。"
+    carrierScac: String
+    "预计发货日期。"
+    expectedShippingDate: DateTime
+    "实际发货日期。"
+    shippingDate: DateTime
+    "运输速度。"
+    shipSpeed: String
+    "运输速度代码。"
+    shipSpeedCode: String
+    "跟踪编号列表。"
+    trackingNumbers: [String!]
+}
+
+"""
+履行订单的仓库信息。
+"""
+type FulfillmentOrderWarehouse {
+    "仓库 ID。"
+    warehouseId: Int
+    "仓库名称。"
+    name: String
+}
+
+"""
+包含 CastleGate 履行订单详细信息的分页列表。
+"""
+type FulfillmentOrderDetailsPagedConnection {
+    "分页信息。"
+    pageInfo: FulfillmentDataPageInfo
+    "履行订单详细信息的节点列表。"
+    nodes: [FulfillmentOrderDetails!]!
+}
+
+"""
+履行订单列表的输入类型。
+"""
+input FulfillmentOrderDetailsListInput {
+    "订单的 Wayfair 供应商标识符。"
+    supplierId: Int!
+    "履行订单的状态列表。"
+    status: [FulfillmentOrderStatus!]
+    "包含与零售商相关的过滤字段的对象。"
+    retailer: FulfillmentOrderDetailsListRetailerInput
+    "Wayfair 创建订单的日期区间过滤器（可选）。"
+    orderCreationDateInterval: FulfillmentOrderDateInterval @DateInterval(
+        message: "无效的 orderCreationDateInterval。字段 'to' 的值：${validatedValue.to} 必须晚于字段 'from' 的值：${validatedValue.from}"
+    )
+    """
+    用于获取履行订单的日期区间过滤器，其中提供的日期在最新发货日期范围内。
+    """
+    shippingDateInterval: FulfillmentOrderDateInterval @DateInterval(
+        message: "无效的 shippingDateInterval。字段 'to' 的值：${validatedValue.to} 必须晚于字段 'from' 的值：${validatedValue.from}"
+    )
+    "订单预计发货日期的日期区间过滤器（可选）。"
+    expectedShippingDateInterval: FulfillmentOrderDateInterval @DateInterval(
+        message: "无效的 expectedShippingDateInterval。字段 'to' 的值：${validatedValue.to} 必须晚于字段 'from' 的值：${validatedValue.from}"
+    )
+    "订单数据列表的排序选项。"
+    sortOption: FulfillmentOrderSortOption
+    "每页的条目数量。"
+    pageSize: Int = 10 @Range(min: 1, max: 25)
+    "页码索引。"
+    page: Int = 1 @Range(min: 1)
+}
+
+"""
+零售商相关数据字段的输入类型。
+"""
+input FulfillmentOrderDetailsListRetailerInput {
+    "过滤零售商 ID 的列表。"
+    retailerIds: [String!]
+    "过滤零售商订单号的列表。"
+    orderNumbers: [String!]
+}
+
+"""
+日期区间的输入类型。
+"""
+input FulfillmentOrderDateInterval {
+    "起始日期时间，ISO 8601 标准。"
+    from: DateTime
+    "结束日期时间，ISO 8601 标准。"
+    to: DateTime
+}
+
+"""
+履行订单详细信息列表的排序选项输入类型。
+"""
+input FulfillmentOrderSortOption {
+    "排序字段。"
+    sortBy: FulfillmentOrderDetailsListSortBy! = ORDER_CREATION_DATE
+    "排序顺序。"
+    sortOrder: OrderFulfillmentSortOrder! = DESC
+}
+
+"""
+可用的排序字段枚举。
+"""
+enum FulfillmentOrderDetailsListSortBy {
+    "按订单创建日期排序。"
+    ORDER_CREATION_DATE
+    "按已发货订单的发货日期排序。"
+    SHIPPING_DATE
+    "按订单的预计发货日期排序。"
+    EXPECTED_SHIPPING_DATE
+}
+
+"""
+履行订单的各种状态。
+"""
+enum FulfillmentOrderStatus {
+    "订单请求已成功接收（通过语法和语义验证）。"
+    PENDING
+    "订单已成功确认并在 Wayfair 的 CastleGate 履行系统中创建，但可能仍需通过某些验证检查。"
+    NEW
+    "履行订单已通过验证，所有物品均已从库存中分配。"
+    ALLOCATED
+    "订单中的部分物品已发货。"
+    PARTIALLY_SHIPPED
+    "订单中的所有物品已发货。"
+    SHIPPED
+    "订单由于某些错误被拒绝。"
+    REJECTED
+    "订单已被暂挂。"
+    ON_HOLD
+    "订单已被取消。"
+    CANCELLED
+}

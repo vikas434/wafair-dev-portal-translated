@@ -1,0 +1,68 @@
+"""
+A date-time string formatted according to RFC 3339 section 5.6 (e.g. '2020-12-25T23:59:59Z' in UTC or '2020-12-25T18:59:59-05:00' in EST).
+"""
+scalar DateTime
+
+"""
+mono iso time, same as the regular Datetime but in yyyy-MM-dd HH:mm:ss.SSSSSS xxxx format
+"""
+scalar MonoDateTime
+
+
+"""
+A date string format
+"""
+scalar Date
+
+"""
+The CountryCode scalar type as defined by ISO 3166-1 alpha-2.
+"""
+scalar CountryCode
+scalar Long
+
+
+"""
+URL Scalar. Uses a string graphql scalar type.
+
+Used to ensure that returned links are valid and navigable
+"""
+scalar Url @specifiedBy(url: "https://www.ietf.org/rfc/rfc1738.txt")
+
+scalar JSON
+
+
+"""
+Extended validation directives supported by DGS
+https://netflix.github.io/dgs/configuration/#dgs-extended-validation-graphql-dgs-extended-validation
+"""
+directive @Size(min : Int = 0, max : Int = 1000, message : String = "graphql.validation.Size.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @ContainerSize(min : Int = 0, max : Int = 1000, message : String = "graphql.validation.ContainerSize.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @Max(value : Int! = 2147483647, message : String = "graphql.validation.Max.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @Min(value : Int! = 0, message : String = "graphql.validation.Min.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @Range(min : Int = 0, max : Int = 2147483647, message : String = "graphql.validation.Range.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @DateInterval(minFromDate: DateTime = "1970-01-01T00:00:00Z", message : String! = "Invalid date interval") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @Pattern(regexp : String! =".*", message : String = "graphql.validation.Pattern.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @NotBlank(message : String = "graphql.validation.NotBlank.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @Positive(message : String = "graphql.validation.Positive.message") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @specifiedBy(url: String!) on SCALAR
+
+directive @Cursor(message : String = "Invalid Cursor String. Please use a valid cursor provided by a previous request, or null if requesting for the first page.") on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
+"""
+Root query object
+"""
+type Query
+
+"""
+Root mutation object
+"""
+type Mutation

@@ -1,0 +1,2968 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CastleGate Multi-Channel Order API</title>
+    <link rel="stylesheet" href="stylesheets/spectaql.min.css" />
+    <script src="javascripts/spectaql.min.js"></script>
+  </head>
+  <body id="spectaql">
+    <div id="page" class="drawer-layout">
+      <div id="sidebar">
+        <div class="sidebar-top-container">
+          <div id="logo">
+          </div>
+          <button class="close-button" type="button">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">Close menu</span>
+          </button>
+        </div>
+        <nav id="nav" role="navigation">
+          <div class="nav-group">
+            <h4 class="nav-group-title">Introduction</h4>
+            <ul class="nav-group-items">
+              <li><a href="#introduction">Welcome</a></li>
+            </ul>
+          </div>
+          <div class="nav-group">
+            <h4 class="nav-group-title">Operations</h4>
+            <ul class="nav-group-items">
+              <li class="nav-group-section">
+                <h5 class="nav-group-section-title">
+                  <a href="#group-Operations-Queries">Queries</a>
+                </h5>
+                <ul class="nav-group-section-items">
+                  <li><a href="#query-fulfillmentOrderDetails">fulfillmentOrderDetails</a></li>
+                  <li><a href="#query-fulfillmentOrderDetailsList">fulfillmentOrderDetailsList</a></li>
+                  <li><a href="#query-warehouseShippingAdvices">warehouseShippingAdvices</a></li>
+                </ul>
+              </li>
+              <li class="nav-group-section">
+                <h5 class="nav-group-section-title">
+                  <a href="#group-Operations-Mutations">Mutations</a>
+                </h5>
+                <ul class="nav-group-section-items">
+                  <li><a href="#mutation-createFulfillmentOrder">createFulfillmentOrder</a></li>
+                </ul>
+              </li>
+              <li><a href="#"></a></li>
+            </ul>
+          </div>
+          <div class="nav-group">
+            <h4 class="nav-group-title">Types</h4>
+            <ul class="nav-group-items">
+              <li><a href="#definition-Boolean">Boolean</a></li>
+              <li><a href="#definition-CreateFulfillmentOrderInput">CreateFulfillmentOrderInput</a></li>
+              <li><a href="#definition-CreateFulfillmentOrderRequestError">CreateFulfillmentOrderRequestError</a></li>
+              <li><a href="#definition-CreateFulfillmentOrderRequestStatus">CreateFulfillmentOrderRequestStatus</a></li>
+              <li><a href="#definition-CreateFulfillmentOrderResponse">CreateFulfillmentOrderResponse</a></li>
+              <li><a href="#definition-DateTime">DateTime</a></li>
+              <li><a href="#definition-Float">Float</a></li>
+              <li><a href="#definition-FulfillmentDataPageInfo">FulfillmentDataPageInfo</a></li>
+              <li><a href="#definition-FulfillmentOrder">FulfillmentOrder</a></li>
+              <li><a href="#definition-FulfillmentOrderBillingAddressInput">FulfillmentOrderBillingAddressInput</a></li>
+              <li><a href="#definition-FulfillmentOrderCustomerInput">FulfillmentOrderCustomerInput</a></li>
+              <li><a href="#definition-FulfillmentOrderDateInterval">FulfillmentOrderDateInterval</a></li>
+              <li><a href="#definition-FulfillmentOrderDetails">FulfillmentOrderDetails</a></li>
+              <li><a href="#definition-FulfillmentOrderDetailsInput">FulfillmentOrderDetailsInput</a></li>
+              <li><a href="#definition-FulfillmentOrderDetailsListInput">FulfillmentOrderDetailsListInput</a></li>
+              <li><a href="#definition-FulfillmentOrderDetailsListRetailerInput">FulfillmentOrderDetailsListRetailerInput</a></li>
+              <li><a href="#definition-FulfillmentOrderDetailsListSortBy">FulfillmentOrderDetailsListSortBy</a></li>
+              <li><a href="#definition-FulfillmentOrderDetailsPagedConnection">FulfillmentOrderDetailsPagedConnection</a></li>
+              <li><a href="#definition-FulfillmentOrderError">FulfillmentOrderError</a></li>
+              <li><a href="#definition-FulfillmentOrderItem">FulfillmentOrderItem</a></li>
+              <li><a href="#definition-FulfillmentOrderItemInput">FulfillmentOrderItemInput</a></li>
+              <li><a href="#definition-FulfillmentOrderRetailer">FulfillmentOrderRetailer</a></li>
+              <li><a href="#definition-FulfillmentOrderRetailerInput">FulfillmentOrderRetailerInput</a></li>
+              <li><a href="#definition-FulfillmentOrderShippingAddress">FulfillmentOrderShippingAddress</a></li>
+              <li><a href="#definition-FulfillmentOrderShippingAddressInput">FulfillmentOrderShippingAddressInput</a></li>
+              <li><a href="#definition-FulfillmentOrderShippingDetails">FulfillmentOrderShippingDetails</a></li>
+              <li><a href="#definition-FulfillmentOrderShippingDetailsInput">FulfillmentOrderShippingDetailsInput</a></li>
+              <li><a href="#definition-FulfillmentOrderSortOption">FulfillmentOrderSortOption</a></li>
+              <li><a href="#definition-FulfillmentOrderStatus">FulfillmentOrderStatus</a></li>
+              <li><a href="#definition-FulfillmentOrderTracking">FulfillmentOrderTracking</a></li>
+              <li><a href="#definition-FulfillmentOrderWarehouse">FulfillmentOrderWarehouse</a></li>
+              <li><a href="#definition-Int">Int</a></li>
+              <li><a href="#definition-OrderFulfillmentSortOrder">OrderFulfillmentSortOrder</a></li>
+              <li><a href="#definition-String">String</a></li>
+              <li><a href="#definition-WarehouseShippingAdvice">WarehouseShippingAdvice</a></li>
+              <li><a href="#definition-WarehouseShippingAdviceInput">WarehouseShippingAdviceInput</a></li>
+              <li><a href="#definition-WarehouseShippingAdvicePagedConnection">WarehouseShippingAdvicePagedConnection</a></li>
+              <li><a href="#definition-WarehouseShippingAdviceSortBy">WarehouseShippingAdviceSortBy</a></li>
+              <li><a href="#definition-WarehouseShippingAdviceSortOption">WarehouseShippingAdviceSortOption</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div id="docs">
+        <div id="mobile-navbar">
+          <button class="sidebar-open-button" type="button">
+            <span class="hamburger"></span>
+            <span class="sr-only">All topics</span>
+          </button>
+        </div>
+        <article id="content">
+          <h1 class="doc-heading">CastleGate Multi-Channel Order API</h1>
+          <div id="introduction" data-traverse-target="introduction">
+            <div id="welcome" class="doc-row">
+              <div class="doc-copy">
+                <p>GraphQL API serving suppliers&#39; CastleGate Multi-Channel order needs.</p>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section welcome-contact-section">
+                  <h5>Contact</h5>
+                </div>
+                <div class="example-section welcome-tos-section">
+                  <h5>Terms of Service</h5>
+                  <p><a href="https://terms.wayfair.io">https://terms.wayfair.io</a></p>
+                </div>
+                <div class="example-section welcome-api-endpoints-section example-section-is-code">
+                  <h5>API Endpoints</h5>
+                  <pre><code>https://api.wayfair.io/v1/supplier-order-api/graphql</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h1 id="group-Operations-Queries" class="group-heading" data-traverse-target="group-Operations-Queries">Queries</h1>
+          <section id="query-fulfillmentOrderDetails" class="operation operation-query" data-traverse-target="query-fulfillmentOrderDetails">
+            <h2 class="operation-heading ">
+              <code>fulfillmentOrderDetails</code>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Returns order information including status for a given supplier&#39;s multi-channel fulfillment order.</p>
+                </div>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a <a href="#definition-FulfillmentOrderDetails"><code>FulfillmentOrderDetails</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>orderDetailsInput</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderDetailsInput"><code>FulfillmentOrderDetailsInput!</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> fulfillmentOrderDetails<span class="hljs-tag">(<span class="hljs-code">$orderDetailsInput</span>:<span class="hljs-type"> FulfillmentOrderDetailsInput!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">fulfillmentOrderDetails<span class="hljs-tag">(orderDetailsInput: <span class="hljs-code">$orderDetailsInput</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">fulfillmentOrder <span class="hljs-tag">{
+      <span class="hljs-type">...FulfillmentOrderFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">fulfillmentOrderErrors <span class="hljs-tag">{
+      <span class="hljs-type">...FulfillmentOrderErrorFragment</span>
+    }</span></span>
+  }</span></span>
+}</span></span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"orderDetailsInput"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderDetailsInput</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"fulfillmentOrderDetails"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"fulfillmentOrder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrder</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"fulfillmentOrderErrors"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">FulfillmentOrderError</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="query-fulfillmentOrderDetailsList" class="operation operation-query" data-traverse-target="query-fulfillmentOrderDetailsList">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
+            <h2 class="operation-heading ">
+              <code>fulfillmentOrderDetailsList</code>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Returns a paginated list order information and current statuses of a given supplier.</p>
+                </div>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a <a href="#definition-FulfillmentOrderDetailsPagedConnection"><code>FulfillmentOrderDetailsPagedConnection!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>orderDetailsListInput</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderDetailsListInput"><code>FulfillmentOrderDetailsListInput!</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> fulfillmentOrderDetailsList<span class="hljs-tag">(<span class="hljs-code">$orderDetailsListInput</span>:<span class="hljs-type"> FulfillmentOrderDetailsListInput!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">fulfillmentOrderDetailsList<span class="hljs-tag">(orderDetailsListInput: <span class="hljs-code">$orderDetailsListInput</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">pageInfo <span class="hljs-tag">{
+      <span class="hljs-type">...FulfillmentDataPageInfoFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">nodes <span class="hljs-tag">{
+      <span class="hljs-type">...FulfillmentOrderDetailsFragment</span>
+    }</span></span>
+  }</span></span>
+}</span></span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"orderDetailsListInput"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderDetailsListInput</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"fulfillmentOrderDetailsList"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"pageInfo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentDataPageInfo</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"nodes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">FulfillmentOrderDetails</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="query-warehouseShippingAdvices" class="operation operation-query" data-traverse-target="query-warehouseShippingAdvices">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
+            <h2 class="operation-heading ">
+              <code>warehouseShippingAdvices</code>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Returns a paginated list of Warehouse Shipping Advices each of which indicate that an item for a multi-channel fulfillment order is being shipped and contains tracking information.</p>
+                </div>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a <a href="#definition-WarehouseShippingAdvicePagedConnection"><code>WarehouseShippingAdvicePagedConnection!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>warehouseShippingAdviceInput</code></span> - <span class="property-type"><a href="#definition-WarehouseShippingAdviceInput"><code>WarehouseShippingAdviceInput!</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> warehouseShippingAdvices<span class="hljs-tag">(<span class="hljs-code">$warehouseShippingAdviceInput</span>:<span class="hljs-type"> WarehouseShippingAdviceInput!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">warehouseShippingAdvices<span class="hljs-tag">(warehouseShippingAdviceInput: <span class="hljs-code">$warehouseShippingAdviceInput</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">pageInfo <span class="hljs-tag">{
+      <span class="hljs-type">...FulfillmentDataPageInfoFragment</span>
+    }</span></span>
+    <span class="hljs-symbol">nodes <span class="hljs-tag">{
+      <span class="hljs-type">...WarehouseShippingAdviceFragment</span>
+    }</span></span>
+  }</span></span>
+}</span></span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"warehouseShippingAdviceInput"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WarehouseShippingAdviceInput</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"warehouseShippingAdvices"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"pageInfo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentDataPageInfo</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"nodes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">WarehouseShippingAdvice</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <h1 id="group-Operations-Mutations" class="group-heading" data-traverse-target="group-Operations-Mutations">Mutations</h1>
+          <section id="mutation-createFulfillmentOrder" class="operation operation-mutation" data-traverse-target="mutation-createFulfillmentOrder">
+            <h2 class="operation-heading ">
+              <code>createFulfillmentOrder</code>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Create a Multi-Channel Fulfillment order.</p>
+                </div>
+              </div>
+            </div>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a <a href="#definition-CreateFulfillmentOrderResponse"><code>CreateFulfillmentOrderResponse!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>fulfillmentOrderInput</code></span> - <span class="property-type"><a href="#definition-CreateFulfillmentOrderInput"><code>CreateFulfillmentOrderInput!</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> createFulfillmentOrder<span class="hljs-tag">(<span class="hljs-code">$fulfillmentOrderInput</span>:<span class="hljs-type"> CreateFulfillmentOrderInput!</span>)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">createFulfillmentOrder<span class="hljs-tag">(fulfillmentOrderInput: <span class="hljs-code">$fulfillmentOrderInput</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">fulfillmentOrderRequestId</span>
+    <span class="hljs-symbol">requestStatus</span>
+    <span class="hljs-symbol">errors <span class="hljs-tag">{
+      <span class="hljs-type">...CreateFulfillmentOrderRequestErrorFragment</span>
+    }</span></span>
+  }</span></span>
+}</span></span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"fulfillmentOrderInput"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CreateFulfillmentOrderInput</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"createFulfillmentOrder"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"fulfillmentOrderRequestId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"requestStatus"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ACCEPTED"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"errors"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">CreateFulfillmentOrderRequestError</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <h1 id="group-Types" class="group-heading" data-traverse-target="group-Types">Types</h1>
+          <section id="definition-Boolean" class="definition definition-scalar" data-traverse-target="definition-Boolean">
+            <h2 class="definition-heading">Boolean</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The <code>Boolean</code> scalar type represents <code>true</code> or <code>false</code>.</p>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-CreateFulfillmentOrderInput" class="definition definition-input-object" data-traverse-target="definition-CreateFulfillmentOrderInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">CreateFulfillmentOrderInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The input type for creating a Multi-Channel fulfillment order</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>sellerFulfillmentOrderId</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> A unique ID associated with the seller's (supplier) fulfillment order. The sellerFulfillmentOrderId must be unique for each fulfillment order that a seller creates to ensure accidental duplicate requests don't create duplicate orders. </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>billingAddress</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderBillingAddressInput"><code>FulfillmentOrderBillingAddressInput</code></a></span>
+                        </td>
+                        <td> The billing address of the person, business or institution, if required </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>customer</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderCustomerInput"><code>FulfillmentOrderCustomerInput!</code></a></span>
+                        </td>
+                        <td> The customer information pertaining to the order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>items</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderItemInput"><code>[FulfillmentOrderItemInput!]!</code></a></span>
+                        </td>
+                        <td> A list of items included in the fulfillment order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>retailer</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderRetailerInput"><code>FulfillmentOrderRetailerInput!</code></a></span>
+                        </td>
+                        <td> The retailer information pertaining to the order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>shippingAddress</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderShippingAddressInput"><code>FulfillmentOrderShippingAddressInput!</code></a></span>
+                        </td>
+                        <td> The shipping address of the person, business or institution </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>shippingDetails</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderShippingDetailsInput"><code>FulfillmentOrderShippingDetailsInput!</code></a></span>
+                        </td>
+                        <td> The details regarding the shipping of the order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>supplierId</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int!</code></a></span>
+                        </td>
+                        <td> The Wayfair parent supplier identifier of the order </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"sellerFulfillmentOrderId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"billingAddress"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderBillingAddressInput</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"customer"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderCustomerInput</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"items"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">FulfillmentOrderItemInput</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"retailer"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderRetailerInput</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"shippingAddress"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderShippingAddressInput</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"shippingDetails"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderShippingDetailsInput</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"supplierId"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-CreateFulfillmentOrderRequestError" class="definition definition-object" data-traverse-target="definition-CreateFulfillmentOrderRequestError">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">CreateFulfillmentOrderRequestError</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Error object describing conditions of a failure for a Multi-Channel fulfillment order request</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>code</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Error code of a fulfillment order create condition </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>message</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Error message detailing the failed condition </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>field</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Field that had an error </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>value</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Value of the field that had an error </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"field"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-CreateFulfillmentOrderRequestStatus" class="definition definition-enum" data-traverse-target="definition-CreateFulfillmentOrderRequestStatus">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">CreateFulfillmentOrderRequestStatus</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The status of a Multi-Channel fulfillment order create request</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Values</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Enum Value</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <p><code>ACCEPTED</code></p>
+                        </td>
+                        <td> The fulfillment order create request was successfully accepted and is to be processed </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>FAILURE</code></p>
+                        </td>
+                        <td> The fulfillment order create request failed and was rejected due to errors, see errors for details </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"ACCEPTED"</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-CreateFulfillmentOrderResponse" class="definition definition-object" data-traverse-target="definition-CreateFulfillmentOrderResponse">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">CreateFulfillmentOrderResponse</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Response of a create fulfillment order request</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>fulfillmentOrderRequestId</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Identifier of the create fulfillment order request. This identifier is to be used in the fulfillmentOrderDetails query to fetch an order. </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>requestStatus</code></span> - <span class="property-type"><a href="#definition-CreateFulfillmentOrderRequestStatus"><code>CreateFulfillmentOrderRequestStatus!</code></a></span>
+                        </td>
+                        <td> Status of the create fulfillment order request </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>errors</code></span> - <span class="property-type"><a href="#definition-CreateFulfillmentOrderRequestError"><code>[CreateFulfillmentOrderRequestError!]</code></a></span>
+                        </td>
+                        <td> Optional list of errors detailing errors that caused the request to fail or be rejected </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"fulfillmentOrderRequestId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"requestStatus"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ACCEPTED"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"errors"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">CreateFulfillmentOrderRequestError</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-DateTime" class="definition definition-scalar" data-traverse-target="definition-DateTime">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">DateTime</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>A date-time string formatted according to RFC 3339 section 5.6 (e.g. &#39;2020-12-25T23:59:59Z&#39; in UTC or &#39;2020-12-25T18:59:59-05:00&#39; in EST).</p>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"2007-12-03T10:15:30Z"</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-Float" class="definition definition-scalar" data-traverse-target="definition-Float">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">Float</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The <code>Float</code> scalar type represents signed double-precision fractional values as specified by <a href="https://en.wikipedia.org/wiki/IEEE_floating_point">IEEE 754</a>.</p>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-number">123.45</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentDataPageInfo" class="definition definition-object" data-traverse-target="definition-FulfillmentDataPageInfo">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentDataPageInfo</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Page Info</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>hasNextPage</code></span> - <span class="property-type"><a href="#definition-Boolean"><code>Boolean!</code></a></span>
+                        </td>
+                        <td> Has Next Page </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>hasPreviousPage</code></span> - <span class="property-type"><a href="#definition-Boolean"><code>Boolean!</code></a></span>
+                        </td>
+                        <td> Has Previous Page </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>totalPages</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int!</code></a></span>
+                        </td>
+                        <td> Total Pages </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>totalItems</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int!</code></a></span>
+                        </td>
+                        <td> Total Items </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"hasNextPage"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"hasPreviousPage"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"totalPages"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"totalItems"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrder" class="definition definition-object" data-traverse-target="definition-FulfillmentOrder">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrder</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The general information regarding a multi-channel fulfillment order, including its status</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>requestId</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The identifier returned from a successful createFulfillmentOrder mutation request, used to identify this order </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>status</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The status of the fulfillment order.<br>
+                          <br><b>PENDING</b>: Order request has been successfully received (passing syntactic and semantic validation). <br><b>NEW</b>: Order has been successfully acknowledged and created in Wayfair’s CastleGate fulfillment system, but is pending some fulfillment validation checks. <br><b>ALLOCATED</b>: The fulfillment order has been validated. All items of the order have been allocated from inventory. If one of the items of an order has not been allocated yet, the order status will remain NEW until all items have been. <br><b>PARTIALLY_SHIPPED</b>: Some items in the order have been shipped. <br><b>SHIPPED</b>: All items of the order have been shipped. <br><b>REJECTED</b>: The order was rejected due to some errors. Error details can be found on the FulfillmentOrderDetails type via the <code>fulfillmentOrderDetails</code> or <code>fulfillmentOrderDetailsList</code> query. <br><b>ON_HOLD</b>: The order has been placed on hold. <br><b>CANCELLED</b>: The order has been cancelled.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>orderDate</code></span> - <span class="property-type"><a href="#definition-DateTime"><code>DateTime</code></a></span>
+                        </td>
+                        <td> The date and time when the order request was accepted by Wayfair </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>customerOrderNumber</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The order number displayed to the customer, submitted with the createFulfillmentOrder operation </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>retailer</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderRetailer"><code>FulfillmentOrderRetailer</code></a></span>
+                        </td>
+                        <td> Information regarding the retailer of this fulfillment order </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>shippingAddress</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderShippingAddress"><code>FulfillmentOrderShippingAddress</code></a></span>
+                        </td>
+                        <td> The destination address submitted with the createFulfillmentOrder operation </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>fulfillmentOrderItems</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderItem"><code>[FulfillmentOrderItem!]</code></a></span>
+                        </td>
+                        <td> List of item details included on the fulfillment order. </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"requestId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"orderDate"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2007-12-03T10:15:30Z"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"customerOrderNumber"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"retailer"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderRetailer</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"shippingAddress"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderShippingAddress</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"fulfillmentOrderItems"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">FulfillmentOrderItem</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderBillingAddressInput" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderBillingAddressInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderBillingAddressInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The input type for the billing address of a Multi-Channel fulfillment order create request</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>name</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> Name of the person, business or institution at this address </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>address1</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> First line of the address </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>address2</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Second line of the address, if required </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>city</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The city where the person, business, or institution is located </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>stateShortName</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The state or region short name where the person, business or institution is located. Required if 'US' (United States) address. Example: "MA" for Massachusetts </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>postalCode</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The postal code of the address </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>countryShortName</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The country short name (code) where the person, business or institution is located. Example: "US" for United States </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"address1"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"address2"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"city"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"stateShortName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"postalCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"countryShortName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderCustomerInput" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderCustomerInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderCustomerInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The input type for the end customer of a Multi-Channel fulfillment order</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>orderNumber</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The end customer order number </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"orderNumber"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderDateInterval" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderDateInterval">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderDateInterval</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Input type for datetime interval</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>from</code></span> - <span class="property-type"><a href="#definition-DateTime"><code>DateTime</code></a></span>
+                        </td>
+                        <td> From (begin) datetime, ISO 8601 standard </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>to</code></span> - <span class="property-type"><a href="#definition-DateTime"><code>DateTime</code></a></span>
+                        </td>
+                        <td> To (end) datetime, ISO 8601 standard </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"from"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2007-12-03T10:15:30Z"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"to"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2007-12-03T10:15:30Z"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderDetails" class="definition definition-object" data-traverse-target="definition-FulfillmentOrderDetails">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderDetails</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The details regarding a fulfillment order including the static order details, status, and optionally any errors that made the order unable to be fulfilled</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>fulfillmentOrder</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrder"><code>FulfillmentOrder!</code></a></span>
+                        </td>
+                        <td> The information regarding the fulfillment order </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>fulfillmentOrderErrors</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderError"><code>[FulfillmentOrderError!]</code></a></span>
+                        </td>
+                        <td> An optional list of errors that made the order unable to be fulfilled after being accepted by createFulfillmentOrder </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"fulfillmentOrder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrder</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"fulfillmentOrderErrors"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">FulfillmentOrderError</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderDetailsInput" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderDetailsInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderDetailsInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The input type for a Multi-Channel fulfillment order details request</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>supplierId</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int!</code></a></span>
+                        </td>
+                        <td> The Wayfair parent supplier identifier of the order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>fulfillmentOrderRequestId</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The identifier returned from a successful createFulfillmentOrder mutation request </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"supplierId"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"fulfillmentOrderRequestId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderDetailsListInput" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderDetailsListInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderDetailsListInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>supplierId</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int!</code></a></span>
+                        </td>
+                        <td> The Wayfair parent supplier identifier of the order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>status</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderStatus"><code>[FulfillmentOrderStatus!]</code></a></span>
+                        </td>
+                        <td> Status of a fulfillment order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>retailer</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderDetailsListRetailerInput"><code>FulfillmentOrderDetailsListRetailerInput</code></a></span>
+                        </td>
+                        <td> Retailer object containing retailer related identifiers to filter orders by </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>orderCreationDateInterval</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderDateInterval"><code>FulfillmentOrderDateInterval</code></a></span>
+                        </td>
+                        <td> Optional date interval filter for the date when Wayfair has created the order. </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>shippingDateInterval</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderDateInterval"><code>FulfillmentOrderDateInterval</code></a></span>
+                        </td>
+                        <td> Optional date interval filter to fetch fulfillment orders where the provided date is within the latest ship date </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>expectedShippingDateInterval</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderDateInterval"><code>FulfillmentOrderDateInterval</code></a></span>
+                        </td>
+                        <td> Optional date interval filter for the expected shipping date of orders </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>sortOption</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderSortOption"><code>FulfillmentOrderSortOption</code></a></span>
+                        </td>
+                        <td> Sort options for the list of order data </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>pageSize</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td> Page Size. Default = <code>10</code> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>page</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td> Page Index. Default = <code>1</code> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"supplierId"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"PENDING"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"retailer"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderDetailsListRetailerInput</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"orderCreationDateInterval"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderDateInterval</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"shippingDateInterval"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderDateInterval</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"expectedShippingDateInterval"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderDateInterval</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"sortOption"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderSortOption</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"pageSize"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"page"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderDetailsListRetailerInput" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderDetailsListRetailerInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderDetailsListRetailerInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Input type for Retailer related data fields</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>retailerIds</code></span> - <span class="property-type"><a href="#definition-String"><code>[String!]</code></a></span>
+                        </td>
+                        <td> List of retailer IDs to filter for </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>orderNumbers</code></span> - <span class="property-type"><a href="#definition-String"><code>[String!]</code></a></span>
+                        </td>
+                        <td> List of retailer order numbers to filter for </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"retailerIds"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"orderNumbers"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderDetailsListSortBy" class="definition definition-enum" data-traverse-target="definition-FulfillmentOrderDetailsListSortBy">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderDetailsListSortBy</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Enum for available fields to sort on for</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Values</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Enum Value</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <p><code>ORDER_CREATION_DATE</code></p>
+                        </td>
+                        <td> Order Created Date </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>SHIPPING_DATE</code></p>
+                        </td>
+                        <td> Shipping Date of a SHIPPED order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>EXPECTED_SHIPPING_DATE</code></p>
+                        </td>
+                        <td> Expected Shipping Date of an oder </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"ORDER_CREATION_DATE"</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderDetailsPagedConnection" class="definition definition-object" data-traverse-target="definition-FulfillmentOrderDetailsPagedConnection">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderDetailsPagedConnection</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Page with output list of CastleGate fulfillment order details</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>pageInfo</code></span> - <span class="property-type"><a href="#definition-FulfillmentDataPageInfo"><code>FulfillmentDataPageInfo</code></a></span>
+                        </td>
+                        <td> Page Info </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>nodes</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderDetails"><code>[FulfillmentOrderDetails!]!</code></a></span>
+                        </td>
+                        <td> List of CastleGate FulfillmentOrderDetails </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"pageInfo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentDataPageInfo</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"nodes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">FulfillmentOrderDetails</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderError" class="definition definition-object" data-traverse-target="definition-FulfillmentOrderError">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderError</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Error object describing conditions of a failure for a Multi-Channel fulfillment order</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>code</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Error code of a failed fulfillment order condition </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>message</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Error message detailing the failed condition </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>field</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Field that had an error </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>value</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Value of the field that had an error </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"field"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"value"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderItem" class="definition definition-object" data-traverse-target="definition-FulfillmentOrderItem">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderItem</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The item information of a product in a fulfillment order</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>fulfillmentOrderItemId</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The Wayfair identifier of a particular item in a fulfillment order. This field may not be present while the order is PENDING or REJECTED, i.e. order has not been fully validated for fulfillment </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>productId</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Stock product ID </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>partNumber</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Part number of the product by the manufacturer </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>supplierProductName</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The supplier's name of the product </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>supplierPartNumber</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The supplier's part number </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>status</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The item's current status </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>failureReasons</code></span> - <span class="property-type"><a href="#definition-String"><code>[String]</code></a></span>
+                        </td>
+                        <td> Reasons for failure in fulfillment of item </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>quantityOrdered</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td> The quantity of the item being ordered </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>quantityShipped</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td> The quantity of the item that has been shipped </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>option</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The option of the item that </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>forcedQuantityMultiplier</code></span> - <span class="property-type"><a href="#definition-Float"><code>Float</code></a></span>
+                        </td>
+                        <td> The forced quantity multiplier applied to a product </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>unitPrice</code></span> - <span class="property-type"><a href="#definition-Float"><code>Float</code></a></span>
+                        </td>
+                        <td> The price of a single product </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"fulfillmentOrderItemId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"productId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"partNumber"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"supplierProductName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"supplierPartNumber"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"failureReasons"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"quantityOrdered"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"quantityShipped"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"option"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"forcedQuantityMultiplier"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"unitPrice"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderItemInput" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderItemInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderItemInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The input type for an item in a Multi-Channel fulfillment order create request</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>supplierProductName</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The supplier's name of the product </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>supplierPartNumber</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The supplier's part number </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>quantity</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int!</code></a></span>
+                        </td>
+                        <td> The quantity of the item being ordered </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>fulfillmentWarehouseId</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td>
+                          <p>The supplier choice of fulfillment warehouse Id. This is an optional field. Please choose from the following valid warehouse IDs:</p>
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Country</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>9</td>
+                                <td>Perris Large Parcel</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>10</td>
+                                <td>Erlanger</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>13</td>
+                                <td>Cranbury Small Parcel</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>17</td>
+                                <td>McDonough</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>18</td>
+                                <td>Perris Small Parcel</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>22</td>
+                                <td>Florence</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>23</td>
+                                <td>Cranbury Large Parcel</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>24</td>
+                                <td>Lancaster</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>25</td>
+                                <td>Port Wentworth (Savannah)</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>26</td>
+                                <td>Lathrop</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>28</td>
+                                <td>Jacksonville</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>35</td>
+                                <td>Aberdeen</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>42</td>
+                                <td>Romeoville</td>
+                                <td>US</td>
+                              </tr>
+                              <tr>
+                                <td>27</td>
+                                <td>UK - Mallow</td>
+                                <td>UK</td>
+                              </tr>
+                              <tr>
+                                <td>33</td>
+                                <td>DE - Lich</td>
+                                <td>DE</td>
+                              </tr>
+                              <tr>
+                                <td>21</td>
+                                <td>CAN - Mississauga</td>
+                                <td>CAN</td>
+                              </tr>
+                              <tr>
+                                <td>45</td>
+                                <td>CAN - Richmond</td>
+                                <td>CAN</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"supplierProductName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"supplierPartNumber"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"quantity"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"fulfillmentWarehouseId"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderRetailer" class="definition definition-object" data-traverse-target="definition-FulfillmentOrderRetailer">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderRetailer</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Information regarding the retailer of a fulfillment order.</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>name</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The name of a retailer </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>retailerId</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The identifier of a retailer </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>orderNumber</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The retailer order number </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"retailerId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"orderNumber"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderRetailerInput" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderRetailerInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderRetailerInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The input type for the retailer of a Multi-Channel fulfillment order create request</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>retailerId</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int!</code></a></span>
+                        </td>
+                        <td> The identifier of a retailer </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>orderNumber</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The retailer's order number </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"retailerId"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"orderNumber"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderShippingAddress" class="definition definition-object" data-traverse-target="definition-FulfillmentOrderShippingAddress">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderShippingAddress</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The shipping (destination) address of a Multi-Channel fulfillment order</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>name</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Name of the person, business or institution at this address </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>address1</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> First line of the address </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>address2</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Second line of the address, if required </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>city</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The city where the person, business, or institution is located </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>stateShortName</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The state or region short name where the person, business or institution is located </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>postalCode</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The postal code of the address </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>countryShortName</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The country short name (code) where the person, business or institution is located. Example: "US" for United States </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>companyName</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Name of the company at this address </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"address1"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"address2"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"city"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"stateShortName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"postalCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"countryShortName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"companyName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderShippingAddressInput" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderShippingAddressInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderShippingAddressInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The input type for the shipping (destination) address of a Multi-Channel fulfillment order create request</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>name</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> Name of the person, business or institution at this address </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>address1</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> First line of the address </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>address2</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Second line of the address, if required </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>city</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The city where the person, business, or institution is located </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>stateShortName</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The state or region short name where the person, business or institution is located. Required if 'US' (United States) address </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>postalCode</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The postal code of the address </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>countryShortName</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> The country short name (code) where the person, business or institution is located. Example: "US" for United States </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>phoneNumber</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The phone number of the person, business or institution at this address </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>companyName</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Name of the company at this address, if applicable </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"address1"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"address2"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"city"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"stateShortName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"postalCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"countryShortName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"phoneNumber"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"companyName"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderShippingDetails" class="definition definition-object" data-traverse-target="definition-FulfillmentOrderShippingDetails">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderShippingDetails</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Order Shipping details</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>shippingAddress</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderShippingAddress"><code>FulfillmentOrderShippingAddress</code></a></span>
+                        </td>
+                        <td> Shipping Address </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>shippingFromAddress</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderShippingAddress"><code>FulfillmentOrderShippingAddress</code></a></span>
+                        </td>
+                        <td> Shipping From Address </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>warehouse</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderWarehouse"><code>FulfillmentOrderWarehouse</code></a></span>
+                        </td>
+                        <td> Warehouse Details </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"shippingAddress"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderShippingAddress</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"shippingFromAddress"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderShippingAddress</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"warehouse"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderWarehouse</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderShippingDetailsInput" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderShippingDetailsInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderShippingDetailsInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The input type for shipping details of a fulfillment order create request</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>shippingAccountNumber</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The shipping account number to be used for the fulfillment order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>carrierScac</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The Standard Carrier Alpha Code to identify the transportation company to be used </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>shipSpeedCode</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> The ship speed code to be used for the fulfillment order </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"shippingAccountNumber"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"carrierScac"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"shipSpeedCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderSortOption" class="definition definition-input-object" data-traverse-target="definition-FulfillmentOrderSortOption">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderSortOption</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Input type for sort options for Fulfillment Order Details List</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>sortBy</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderDetailsListSortBy"><code>FulfillmentOrderDetailsListSortBy!</code></a></span>
+                        </td>
+                        <td> Sort By Field. Default = <code>ORDER_CREATION_DATE</code> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>sortOrder</code></span> - <span class="property-type"><a href="#definition-OrderFulfillmentSortOrder"><code>OrderFulfillmentSortOrder!</code></a></span>
+                        </td>
+                        <td> Sort Order. Default = <code>DESC</code> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"sortBy"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ORDER_CREATION_DATE"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"sortOrder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ASC"</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderStatus" class="definition definition-enum" data-traverse-target="definition-FulfillmentOrderStatus">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderStatus</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Various Fulfillment Order Statuses</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Values</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Enum Value</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <p><code>PENDING</code></p>
+                        </td>
+                        <td> Order request has been successfully received (passing syntactic and semantic validation). </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>NEW</code></p>
+                        </td>
+                        <td> Order has been successfully acknowledged and created in Wayfair’s CastleGate fulfillment system, but may be awaiting some fulfillment validation checks. </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>ALLOCATED</code></p>
+                        </td>
+                        <td> The fulfillment order has been validated. All items of the order have been allocated from inventory. If one of the items of an order has not been allocated yet, the order status will remain NEW until all items have been. </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>PARTIALLY_SHIPPED</code></p>
+                        </td>
+                        <td> Some items in the order have been shipped. </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>SHIPPED</code></p>
+                        </td>
+                        <td> All items of the order have been shipped. </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>REJECTED</code></p>
+                        </td>
+                        <td> The order was rejected due to some errors. Error details can be found on the FulfillmentOrderDetails type via the <code>fulfillmentOrderDetails</code> or <code>fulfillmentOrderDetailsList</code> query. </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>ON_HOLD</code></p>
+                        </td>
+                        <td> The order has been placed on hold. </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>CANCELLED</code></p>
+                        </td>
+                        <td> The order has been cancelled. </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"PENDING"</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderTracking" class="definition definition-object" data-traverse-target="definition-FulfillmentOrderTracking">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderTracking</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Order Tracking Details</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>carrier</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Carrier </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>carrierScac</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Standard Carrier Alpha Code used to identify transportation companies </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>expectedShippingDate</code></span> - <span class="property-type"><a href="#definition-DateTime"><code>DateTime</code></a></span>
+                        </td>
+                        <td> Expected Shipping Date </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>shippingDate</code></span> - <span class="property-type"><a href="#definition-DateTime"><code>DateTime</code></a></span>
+                        </td>
+                        <td> Shipping by Date </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>shipSpeed</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Ship Speed </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>shipSpeedCode</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Ship Speed Code </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>trackingNumbers</code></span> - <span class="property-type"><a href="#definition-String"><code>[String!]</code></a></span>
+                        </td>
+                        <td> Tracking Numbers </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"carrier"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"carrierScac"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"expectedShippingDate"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2007-12-03T10:15:30Z"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"shippingDate"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2007-12-03T10:15:30Z"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"shipSpeed"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"shipSpeedCode"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"trackingNumbers"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FulfillmentOrderWarehouse" class="definition definition-object" data-traverse-target="definition-FulfillmentOrderWarehouse">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FulfillmentOrderWarehouse</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Warehouse Details for Order</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>warehouseId</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td> Warehouse ID </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>name</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Warehouse name </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"warehouseId"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-Int" class="definition definition-scalar" data-traverse-target="definition-Int">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">Int</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The <code>Int</code> scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.</p>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-number">987</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-OrderFulfillmentSortOrder" class="definition definition-enum" data-traverse-target="definition-OrderFulfillmentSortOrder">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">OrderFulfillmentSortOrder</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Enum for Sorting options for fulfillment orders</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Values</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Enum Value</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <p><code>ASC</code></p>
+                        </td>
+                        <td> Ascending </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>DESC</code></p>
+                        </td>
+                        <td> Descending </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"ASC"</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-String" class="definition definition-scalar" data-traverse-target="definition-String">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">String</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The <code>String</code> scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.</p>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"xyz789"</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-WarehouseShippingAdvice" class="definition definition-object" data-traverse-target="definition-WarehouseShippingAdvice">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">WarehouseShippingAdvice</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Warehouse Shipping Advice (WSA) document including tracking information regarding a CastleGate order item.</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>fulfillmentOrderItemId</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td> Order Item ID </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>warehouseShippingAdviceDate</code></span> - <span class="property-type"><a href="#definition-DateTime"><code>DateTime</code></a></span>
+                        </td>
+                        <td> WSA Date and time </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>fulfillmentOrderRequestId</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Order Request ID (fulfillmentOrderRequestId) returned from the createFulfillmentOrder mutation </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>fulfillmentPurchaseOrderNumber</code></span> - <span class="property-type"><a href="#definition-String"><code>String</code></a></span>
+                        </td>
+                        <td> Purchase Order Number </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>supplierId</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td> The parent supplier identifier of the order </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>retailer</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderRetailer"><code>FulfillmentOrderRetailer!</code></a></span>
+                        </td>
+                        <td> Order Retailer </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>productDetails</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderItem"><code>FulfillmentOrderItem</code></a></span>
+                        </td>
+                        <td> Order Product Details </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>shippingDetails</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderShippingDetails"><code>FulfillmentOrderShippingDetails</code></a></span>
+                        </td>
+                        <td> Shipping Details </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>tracking</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderTracking"><code>FulfillmentOrderTracking</code></a></span>
+                        </td>
+                        <td> Tracking Details </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"fulfillmentOrderItemId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"warehouseShippingAdviceDate"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2007-12-03T10:15:30Z"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"fulfillmentOrderRequestId"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"fulfillmentPurchaseOrderNumber"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"supplierId"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"retailer"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderRetailer</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"productDetails"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderItem</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"shippingDetails"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderShippingDetails</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"tracking"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderTracking</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-WarehouseShippingAdviceInput" class="definition definition-input-object" data-traverse-target="definition-WarehouseShippingAdviceInput">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">WarehouseShippingAdviceInput</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Input type for Warehouse Shipping Advice</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>fulfillmentOrderItemIds</code></span> - <span class="property-type"><a href="#definition-String"><code>[String!]</code></a></span>
+                        </td>
+                        <td> Item IDs for a Fulfillment Order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>supplierId</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int!</code></a></span>
+                        </td>
+                        <td> The Wayfair parent supplier identifier of the order </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>warehouseShippingAdviceDateInterval</code></span> - <span class="property-type"><a href="#definition-FulfillmentOrderDateInterval"><code>FulfillmentOrderDateInterval</code></a></span>
+                        </td>
+                        <td> Date Interval to fetch WSAs </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>sortOption</code></span> - <span class="property-type"><a href="#definition-WarehouseShippingAdviceSortOption"><code>WarehouseShippingAdviceSortOption</code></a></span>
+                        </td>
+                        <td> Sort Options for Output WSAs </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>pageSize</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td> Page Size. Default = <code>50</code> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>page</code></span> - <span class="property-type"><a href="#definition-Int"><code>Int</code></a></span>
+                        </td>
+                        <td> Page Index. Default = <code>1</code> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"fulfillmentOrderItemIds"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"supplierId"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"warehouseShippingAdviceDateInterval"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentOrderDateInterval</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"sortOption"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WarehouseShippingAdviceSortOption</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"pageSize"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"page"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-WarehouseShippingAdvicePagedConnection" class="definition definition-object" data-traverse-target="definition-WarehouseShippingAdvicePagedConnection">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">WarehouseShippingAdvicePagedConnection</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Page with output WSAs</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>pageInfo</code></span> - <span class="property-type"><a href="#definition-FulfillmentDataPageInfo"><code>FulfillmentDataPageInfo</code></a></span>
+                        </td>
+                        <td> Page Info </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name=""><span class="property-name"><code>nodes</code></span> - <span class="property-type"><a href="#definition-WarehouseShippingAdvice"><code>[WarehouseShippingAdvice!]!</code></a></span>
+                        </td>
+                        <td> Output WSAs </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"pageInfo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">FulfillmentDataPageInfo</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"nodes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">WarehouseShippingAdvice</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-WarehouseShippingAdviceSortBy" class="definition definition-enum" data-traverse-target="definition-WarehouseShippingAdviceSortBy">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">WarehouseShippingAdviceSortBy</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Enum for available fields to sort on for WSAs</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Values</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Enum Value</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <p><code>WAREHOUSE_SHIPPING_ADVICE_DATE</code></p>
+                        </td>
+                        <td> Sort By WSA Date </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"WAREHOUSE_SHIPPING_ADVICE_DATE"</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-WarehouseShippingAdviceSortOption" class="definition definition-input-object" data-traverse-target="definition-WarehouseShippingAdviceSortOption">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">WarehouseShippingAdviceSortOption</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>Input type for sort options for WSAs</p>
+                </div>
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Input Field</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>sortBy</code></span> - <span class="property-type"><a href="#definition-WarehouseShippingAdviceSortBy"><code>WarehouseShippingAdviceSortBy!</code></a></span>
+                        </td>
+                        <td> Sort By Field. Default = <code>WAREHOUSE_SHIPPING_ADVICE_DATE</code> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>sortOrder</code></span> - <span class="property-type"><a href="#definition-OrderFulfillmentSortOrder"><code>OrderFulfillmentSortOrder!</code></a></span>
+                        </td>
+                        <td> Sort Order. Default = <code>DESC</code> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                    <head></head>
+                    <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"sortBy"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"WAREHOUSE_SHIPPING_ADVICE_DATE"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"sortOrder"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"ASC"</span><span class="hljs-punctuation">}</span>
+</code></pre>
+                    </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="doc-row no-margin">
+            <div class="doc-copy doc-separator">
+              <a class="powered-by" href="https://github.com/anvilco/spectaql">Documentation by <span>Anvil SpectaQL</span></a>
+            </div>
+          </div>
+        </article>
+        <div class="drawer-overlay"></div>
+      </div>
+    </div>
+  </body>
+</html>

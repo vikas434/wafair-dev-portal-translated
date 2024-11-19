@@ -16,10 +16,15 @@ import GraphiQL from './pages/GraphiQL';
 import UsingPostman from './pages/UsingPostman';
 import IntegrationStatus from './pages/IntegrationStatus';
 import VettingPage from './pages/VettingPage';
+import MultiChannelAPIOverview from './pages/MultiChannelAPIOverview';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [language, setLanguage] = useState('en');
   const { t } = useTranslation();
+  const handleLanguageChange = (lng: string) => {
+    setLanguage(lng);
+  };
 
   useEffect(() => {
     document.title = t('siteTitle');
@@ -47,6 +52,8 @@ function App() {
         return <IntegrationStatus />;
       case 'vetting':
         return <VettingPage />;
+      case 'mc-order-api':
+      return <MultiChannelAPIOverview />;
       case 'introduction':
       case 'home':
         return <Home />;
@@ -58,9 +65,8 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
       <Header />
-      <Sidebar currentPage={currentPage} onNavigate={setCurrentPage} />
-      <LanguageSwitcher />
-      
+      <LanguageSwitcher onLanguageChange={handleLanguageChange} />
+      <Sidebar currentPage={currentPage} onNavigate={setCurrentPage} currentLanguage={language}/>
       <div className="lg:pl-64 pt-16 pb-16">
         <main className="min-h-screen">
           {renderPage()}

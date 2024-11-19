@@ -5,15 +5,17 @@ import { ChevronDown, ChevronRight } from 'lucide-react';
 interface NavItem {
   id: string;
   label: string;
+  link?: string;
   children?: NavItem[];
 }
 
 interface SidebarProps {
   currentPage: string;
   onNavigate: (page: string) => void;
+  currentLanguage: string;
 }
 
-export default function Sidebar({ currentPage, onNavigate }: SidebarProps) {
+export default function Sidebar({ currentPage, onNavigate, currentLanguage }: SidebarProps) {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = React.useState(false);
   const [expandedSections, setExpandedSections] = React.useState<string[]>(['getting-started']);
@@ -41,6 +43,14 @@ export default function Sidebar({ currentPage, onNavigate }: SidebarProps) {
         { id: 'integration-status', label: 'API Integration Status' },
         { id: 'vetting', label: 'Vetting Page' },
       ]
+    },
+    {
+      id: 'apis',
+      label: 'Multi Channel API',
+      children: [
+        { id: 'mc-order-api', label: 'Overview' },
+        { id: 'mc-graphql-docs', label: 'GraphQL Docs', link: `/public/${currentLanguage}/` },
+      ]
     }
   ];
 
@@ -64,11 +74,19 @@ export default function Sidebar({ currentPage, onNavigate }: SidebarProps) {
     const hasChildren = item.children && item.children.length > 0;
     const isActive = currentPage === item.id || 
       (item.id === 'getting-started' && currentPage === 'introduction');
-    
+  
+    const handleClick = () => {
+      if (item.link) {
+        window.open(item.link, '_blank');
+      } else {
+        handleNavigation(item.id);
+      }
+    };
+  
     return (
       <div key={item.id} className="w-full">
         <button
-          onClick={() => hasChildren ? toggleSection(item.id) : handleNavigation(item.id)}
+          onClick={() => (hasChildren ? toggleSection(item.id) : handleClick())}
           className={`
             w-full text-left flex items-center justify-between
             px-4 py-2 rounded-lg transition-colors
@@ -88,7 +106,7 @@ export default function Sidebar({ currentPage, onNavigate }: SidebarProps) {
         
         {hasChildren && isExpanded && (
           <div className={`ml-${level + 4} mt-1 space-y-1`}>
-            {item.children.map(child => renderNavItem(child, level + 1))}
+            {item.children?.map(child => renderNavItem(child, level + 1))}
           </div>
         )}
       </div>

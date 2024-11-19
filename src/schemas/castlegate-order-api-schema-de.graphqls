@@ -1,0 +1,594 @@
+extend type Query {
+    """
+    Gibt Bestellinformationen einschließlich Status für die Multi-Channel-Fulfillment-Bestellung eines Lieferanten zurück.
+    """
+    fulfillmentOrderDetails(orderDetailsInput: FulfillmentOrderDetailsInput!): FulfillmentOrderDetails
+
+    """
+    Gibt eine paginierte Liste von Warehouse Shipping Advices zurück, die anzeigen, dass ein Artikel einer 
+    Multi-Channel-Fulfillment-Bestellung versendet wird und Tracking-Informationen enthält.
+    """
+    warehouseShippingAdvices(warehouseShippingAdviceInput: WarehouseShippingAdviceInput!): WarehouseShippingAdvicePagedConnection!
+
+    """
+    Gibt eine paginierte Liste von Bestellinformationen und aktuellen Status eines Lieferanten zurück.
+    """
+    fulfillmentOrderDetailsList(orderDetailsListInput: FulfillmentOrderDetailsListInput!): FulfillmentOrderDetailsPagedConnection!
+}
+
+extend type Mutation {
+    """
+    Erstellt eine Multi-Channel-Fulfillment-Bestellung.
+    """
+    createFulfillmentOrder(fulfillmentOrderInput: CreateFulfillmentOrderInput!): CreateFulfillmentOrderResponse!
+}
+
+"""
+Der Eingabetyp für die Erstellung einer Multi-Channel-Fulfillment-Bestellung.
+"""
+input CreateFulfillmentOrderInput {
+    """
+    Eine eindeutige ID, die der Fulfillment-Bestellung des Verkäufers (Lieferanten) zugeordnet ist. 
+    Die sellerFulfillmentOrderId muss für jede Fulfillment-Bestellung eindeutig sein, die ein Verkäufer erstellt, 
+    um versehentliche doppelte Bestellungen zu vermeiden.
+    """
+    sellerFulfillmentOrderId: String
+    "Die Rechnungsadresse der Person, des Unternehmens oder der Institution, falls erforderlich."
+    billingAddress: FulfillmentOrderBillingAddressInput
+    "Die Kundeninformationen zu dieser Bestellung."
+    customer: FulfillmentOrderCustomerInput!
+    "Eine Liste von Artikeln, die in der Fulfillment-Bestellung enthalten sind."
+    items: [FulfillmentOrderItemInput!]!
+    "Die Einzelhändlerinformationen zu dieser Bestellung."
+    retailer: FulfillmentOrderRetailerInput!
+    "Die Versandadresse der Person, des Unternehmens oder der Institution."
+    shippingAddress: FulfillmentOrderShippingAddressInput!
+    "Details zum Versand der Bestellung."
+    shippingDetails: FulfillmentOrderShippingDetailsInput!
+    "Die Wayfair-Lieferanten-ID der Bestellung."
+    supplierId: Int!
+}
+
+"""
+Der Eingabetyp für die Rechnungsadresse einer Multi-Channel-Fulfillment-Bestellung.
+"""
+input FulfillmentOrderBillingAddressInput {
+    "Name der Person, des Unternehmens oder der Institution an dieser Adresse."
+    name: String!
+    "Erste Zeile der Adresse."
+    address1: String!
+    "Zweite Zeile der Adresse, falls erforderlich."
+    address2: String
+    "Die Stadt, in der sich die Person, das Unternehmen oder die Institution befindet."
+    city: String!
+    """
+    Kurzname des Bundesstaates oder der Region, in der sich die Person, das Unternehmen oder die Institution befindet.
+    Erforderlich, wenn es sich um eine Adresse in den USA handelt. Beispiel: "MA" für Massachusetts.
+    """
+    stateShortName: String
+    "Die Postleitzahl der Adresse."
+    postalCode: String!
+    """
+    Kurzname (Code) des Landes, in dem sich die Person, das Unternehmen oder die Institution befindet.
+    Beispiel: "US" für die Vereinigten Staaten.
+    """
+    countryShortName: String!
+}
+
+"""
+Der Eingabetyp für den Endkunden einer Multi-Channel-Fulfillment-Bestellung.
+"""
+input FulfillmentOrderCustomerInput {
+    "Die Bestellnummer des Endkunden."
+    orderNumber: String!
+}
+
+"""
+Der Eingabetyp für einen Artikel in einer Multi-Channel-Fulfillment-Bestellung.
+"""
+input FulfillmentOrderItemInput {
+    "Der Name des Produkts des Lieferanten."
+    supplierProductName: String
+    "Die Teilenummer des Lieferanten."
+    supplierPartNumber: String!
+    "Die Anzahl der bestellten Artikel."
+    quantity: Int!
+    """
+    Die Wahl des Lieferanten für die Fulfillment-Lager-ID.
+    Dies ist ein optionales Feld.
+    Wählen Sie aus den folgenden gültigen Lager-IDs:
+
+    | ID | Name                      | Land     |
+    |----|---------------------------|----------|
+    | 9  | Perris Large Parcel       | USA      |
+    | 10 | Erlanger                  | USA      |
+    | 13 | Cranbury Small Parcel     | USA      |
+    | 17 | McDonough                 | USA      |
+    | 18 | Perris Small Parcel       | USA      |
+    | 22 | Florence                  | USA      |
+    | 23 | Cranbury Large Parcel     | USA      |
+    | 24 | Lancaster                 | USA      |
+    | 25 | Port Wentworth (Savannah) | USA      |
+    | 26 | Lathrop                   | USA      |
+    | 28 | Jacksonville              | USA      |
+    | 35 | Aberdeen                  | USA      |
+    | 42 | Romeoville                | USA      |
+    | 27 | UK - Mallow               | UK       |
+    | 33 | DE - Lich                 | DE       |
+    | 21 | CAN - Mississauga         | Kanada   |
+    | 45 | CAN - Richmond            | Kanada   |
+    """
+    fulfillmentWarehouseId: Int
+}
+
+"""
+Der Eingabetyp für den Einzelhändler einer Multi-Channel-Fulfillment-Bestellung.
+"""
+input FulfillmentOrderRetailerInput {
+    "Die ID eines Einzelhändlers."
+    retailerId: Int!
+    "Die Bestellnummer des Einzelhändlers."
+    orderNumber: String!
+}
+
+"""
+Der Eingabetyp für die Versandadresse einer Multi-Channel-Fulfillment-Bestellung.
+"""
+input FulfillmentOrderShippingAddressInput {
+    "Name der Person, des Unternehmens oder der Institution an dieser Adresse."
+    name: String!
+    "Erste Zeile der Adresse."
+    address1: String!
+    "Zweite Zeile der Adresse, falls erforderlich."
+    address2: String
+    "Die Stadt, in der sich die Person, das Unternehmen oder die Institution befindet."
+    city: String!
+    """
+    Kurzname des Bundesstaates oder der Region, in der sich die Person, das Unternehmen oder die Institution befindet.
+    Erforderlich, wenn es sich um eine Adresse in den USA handelt.
+    """
+    stateShortName: String
+    "Die Postleitzahl der Adresse."
+    postalCode: String!
+    """
+    Kurzname (Code) des Landes, in dem sich die Person, das Unternehmen oder die Institution befindet.
+    Beispiel: "US" für die Vereinigten Staaten.
+    """
+    countryShortName: String!
+    "Die Telefonnummer der Person, des Unternehmens oder der Institution an dieser Adresse."
+    phoneNumber: String
+    "Der Name des Unternehmens an dieser Adresse, falls zutreffend."
+    companyName: String
+}
+
+"""
+Der Eingabetyp für Versanddetails einer Fulfillment-Bestellung.
+"""
+input FulfillmentOrderShippingDetailsInput {
+    """
+    Die Versandkontonummer, die für die Fulfillment-Bestellung verwendet werden soll.
+    """
+    shippingAccountNumber: String
+    """
+    Der Standard-Carrier-Alpha-Code zur Identifizierung des zu verwendenden Transportunternehmens.
+    """
+    carrierScac: String
+    "Der Versandgeschwindigkeitscode, der für die Fulfillment-Bestellung verwendet werden soll."
+    shipSpeedCode: String
+}
+
+"""
+Antwort auf eine Anfrage zur Erstellung einer Fulfillment-Bestellung.
+"""
+type CreateFulfillmentOrderResponse {
+    """
+    Die Kennung der Anfrage zur Erstellung einer Fulfillment-Bestellung. 
+    Diese Kennung wird in der fulfillmentOrderDetails-Abfrage verwendet, um eine Bestellung abzurufen.
+    """
+    fulfillmentOrderRequestId: String
+    "Status der Anfrage zur Erstellung einer Fulfillment-Bestellung."
+    requestStatus: CreateFulfillmentOrderRequestStatus!
+    "Optionale Liste von Fehlern, die die Fehlerursachen der Anfrage beschreiben."
+    errors: [CreateFulfillmentOrderRequestError!]
+}
+
+"""
+Status einer Anfrage zur Erstellung einer Multi-Channel-Fulfillment-Bestellung.
+"""
+enum CreateFulfillmentOrderRequestStatus {
+    "Die Anfrage zur Erstellung der Fulfillment-Bestellung wurde erfolgreich akzeptiert und wird bearbeitet."
+    ACCEPTED
+    "Die Anfrage zur Erstellung der Fulfillment-Bestellung ist fehlgeschlagen und wurde aufgrund von Fehlern abgelehnt."
+    FAILURE
+}
+
+"""
+Fehlerobjekt, das Bedingungen für das Scheitern einer Anfrage zur Erstellung einer Fulfillment-Bestellung beschreibt.
+"""
+type CreateFulfillmentOrderRequestError {
+    "Fehlercode einer Bedingung für eine fehlgeschlagene Fulfillment-Bestellung."
+    code: String
+    "Fehlermeldung, die die fehlgeschlagene Bedingung beschreibt."
+    message: String
+    "Das Feld, das einen Fehler hatte."
+    field: String
+    "Der Wert des Feldes, das einen Fehler hatte."
+    value: String
+}
+
+"""
+Der Eingabetyp für eine Anfrage zu Multi-Channel-Fulfillment-Bestelldetails.
+"""
+input FulfillmentOrderDetailsInput {
+    "Die Wayfair-Lieferanten-ID der Bestellung."
+    supplierId: Int!
+    "Die Kennung, die von einer erfolgreichen Mutation `createFulfillmentOrder` zurückgegeben wurde."
+    fulfillmentOrderRequestId: String!
+}
+
+"""
+Die Details zu einer Fulfillment-Bestellung, einschließlich statischer Bestelldetails, Status und optionaler Fehler.
+"""
+type FulfillmentOrderDetails {
+    "Die Informationen zur Fulfillment-Bestellung."
+    fulfillmentOrder: FulfillmentOrder!
+    """
+    Eine optionale Liste von Fehlern, die die Bestellung nach Annahme durch `createFulfillmentOrder` nicht ausführbar machten.
+    """
+    fulfillmentOrderErrors: [FulfillmentOrderError!]
+}
+
+"""
+Die allgemeinen Informationen zu einer Multi-Channel-Fulfillment-Bestellung, einschließlich ihres Status.
+"""
+type FulfillmentOrder {
+    "Die Kennung, die von einer erfolgreichen Mutation `createFulfillmentOrder` zurückgegeben wurde, zur Identifizierung dieser Bestellung."
+    requestId: String!
+    """
+    Der Status der Fulfillment-Bestellung.<br>
+    <br><b>PENDING</b>: Bestellanforderung wurde erfolgreich empfangen (sowohl syntaktisch als auch semantisch überprüft).
+    <br><b>NEW</b>: Die Bestellung wurde erfolgreich bestätigt und im CastleGate-Fulfillmentsystem von Wayfair erstellt, aber es fehlen möglicherweise noch einige Fulfillment-Validierungsprüfungen.
+    <br><b>ALLOCATED</b>: Die Fulfillment-Bestellung wurde validiert. Alle Artikel der Bestellung wurden aus dem Lagerbestand zugewiesen. Wenn ein Artikel noch nicht zugewiesen wurde, bleibt der Bestellstatus auf NEW, bis alle Artikel zugewiesen sind.
+    <br><b>PARTIALLY_SHIPPED</b>: Einige Artikel der Bestellung wurden versendet.
+    <br><b>SHIPPED</b>: Alle Artikel der Bestellung wurden versendet.
+    <br><b>REJECTED</b>: Die Bestellung wurde aufgrund von Fehlern abgelehnt. Fehlerdetails finden Sie im Typ `FulfillmentOrderDetails` über die Abfragen `fulfillmentOrderDetails` oder `fulfillmentOrderDetailsList`.
+    <br><b>ON_HOLD</b>: Die Bestellung wurde zurückgestellt.
+    <br><b>CANCELLED</b>: Die Bestellung wurde storniert.
+    """
+    status: String!
+    "Das Datum und die Uhrzeit, zu der die Bestellanforderung von Wayfair akzeptiert wurde."
+    orderDate: DateTime
+    "Die Bestellnummer, die dem Kunden angezeigt wird, eingereicht mit der Mutation `createFulfillmentOrder`."
+    customerOrderNumber: String
+    "Informationen zum Einzelhändler dieser Fulfillment-Bestellung."
+    retailer: FulfillmentOrderRetailer
+    "Die Versandadresse, die mit der Mutation `createFulfillmentOrder` eingereicht wurde."
+    shippingAddress: FulfillmentOrderShippingAddress
+    "Liste der Artikeldetails, die in der Fulfillment-Bestellung enthalten sind."
+    fulfillmentOrderItems: [FulfillmentOrderItem!]
+}
+
+"""
+Informationen zum Einzelhändler einer Fulfillment-Bestellung.
+"""
+type FulfillmentOrderRetailer {
+    "Der Name eines Einzelhändlers."
+    name: String
+    "Die ID eines Einzelhändlers."
+    retailerId: String
+    "Die Bestellnummer des Einzelhändlers."
+    orderNumber: String
+}
+
+"""
+Die Versandadresse einer Multi-Channel-Fulfillment-Bestellung.
+"""
+type FulfillmentOrderShippingAddress {
+    "Name der Person, des Unternehmens oder der Institution an dieser Adresse."
+    name: String
+    "Erste Zeile der Adresse."
+    address1: String
+    "Zweite Zeile der Adresse, falls erforderlich."
+    address2: String
+    "Die Stadt, in der sich die Person, das Unternehmen oder die Institution befindet."
+    city: String
+    "Der Kurzname des Bundesstaates oder der Region, in der sich die Person, das Unternehmen oder die Institution befindet."
+    stateShortName: String
+    "Die Postleitzahl der Adresse."
+    postalCode: String
+    """
+    Der Kurzname (Code) des Landes, in dem sich die Person, das Unternehmen oder die Institution befindet.
+    Beispiel: "US" für die Vereinigten Staaten.
+    """
+    countryShortName: String
+    "Der Name des Unternehmens an dieser Adresse, falls zutreffend."
+    companyName: String
+}
+
+"""
+Die Artikeldetails eines Produkts in einer Fulfillment-Bestellung.
+"""
+type FulfillmentOrderItem {
+    """
+    Die Wayfair-Kennung eines bestimmten Artikels in einer Fulfillment-Bestellung. Dieses Feld ist möglicherweise nicht vorhanden, 
+    während die Bestellung PENDING oder REJECTED ist, d. h., die Bestellung wurde noch nicht vollständig für die Erfüllung validiert.
+    """
+    fulfillmentOrderItemId: String
+    "Die Lager-ID des Produkts."
+    productId: String
+    "Die Teilenummer des Produkts des Herstellers."
+    partNumber: String
+    "Der Name des Produkts des Lieferanten."
+    supplierProductName: String
+    "Die Teilenummer des Lieferanten."
+    supplierPartNumber: String
+    "Der aktuelle Status des Artikels."
+    status: String
+    "Gründe für das Scheitern der Erfüllung des Artikels."
+    failureReasons: [String]
+    "Die Anzahl der bestellten Artikel."
+    quantityOrdered: Int
+    "Die Anzahl der versendeten Artikel."
+    quantityShipped: Int
+    "Die Option des Artikels."
+    option: String
+    "Der erzwungene Mengenmultiplikator, der auf ein Produkt angewendet wird."
+    forcedQuantityMultiplier: Float
+    "Der Preis eines einzelnen Produkts."
+    unitPrice: Float
+}
+
+"""
+Fehlerobjekt, das Bedingungen für das Scheitern einer Multi-Channel-Fulfillment-Bestellung beschreibt.
+"""
+type FulfillmentOrderError {
+    "Fehlercode einer Bedingung für eine fehlgeschlagene Fulfillment-Bestellung."
+    code: String
+    "Fehlermeldung, die die fehlgeschlagene Bedingung beschreibt."
+    message: String
+    "Das Feld, das einen Fehler hatte."
+    field: String
+    "Der Wert des Feldes, das einen Fehler hatte."
+    value: String
+}
+
+"""
+Eingabetyp für Warehouse Shipping Advice.
+"""
+input WarehouseShippingAdviceInput {
+    "Artikel-IDs für eine Fulfillment-Bestellung."
+    fulfillmentOrderItemIds: [String!]
+    "Die Wayfair-Lieferanten-ID der Bestellung."
+    supplierId: Int!
+    "Datumsintervall zum Abrufen von Warehouse Shipping Advices."
+    warehouseShippingAdviceDateInterval: FulfillmentOrderDateInterval @DateInterval(
+        message: "Ungültiges warehouseShippingAdviceDateInterval. Der Wert von 'to': ${validatedValue.to} muss nach dem Wert von 'from': ${validatedValue.from} liegen."
+    )
+    "Sortieroptionen für die Ausgabe von Warehouse Shipping Advices."
+    sortOption: WarehouseShippingAdviceSortOption
+    "Seitengröße."
+    pageSize: Int = 50 @Range(min: 1, max: 100)
+    "Seitenindex."
+    page: Int = 1 @Range(min: 1)
+}
+
+"""
+Eingabetyp für Sortieroptionen für Warehouse Shipping Advices.
+"""
+input WarehouseShippingAdviceSortOption {
+    "Sortieren nach Feld."
+    sortBy: WarehouseShippingAdviceSortBy! = WAREHOUSE_SHIPPING_ADVICE_DATE
+    "Sortierreihenfolge."
+    sortOrder: OrderFulfillmentSortOrder! = DESC
+}
+
+"""
+Enum für verfügbare Felder zum Sortieren von Warehouse Shipping Advices.
+"""
+enum WarehouseShippingAdviceSortBy {
+    "Sortieren nach WSA-Datum."
+    WAREHOUSE_SHIPPING_ADVICE_DATE
+}
+
+"""
+Enum für Sortieroptionen für Fulfillment-Bestellungen.
+"""
+enum OrderFulfillmentSortOrder {
+    "Aufsteigend."
+    ASC
+    "Absteigend."
+    DESC
+}
+
+"""
+Seite mit Warehouse Shipping Advices.
+"""
+type WarehouseShippingAdvicePagedConnection {
+    "Seiteninformationen."
+    pageInfo: FulfillmentDataPageInfo
+    "Ausgabe von Warehouse Shipping Advices."
+    nodes: [WarehouseShippingAdvice!]!
+}
+
+"""
+Seiteninformationen.
+"""
+type FulfillmentDataPageInfo {
+    "Hat eine nächste Seite."
+    hasNextPage: Boolean!
+    "Hat eine vorherige Seite."
+    hasPreviousPage: Boolean!
+    "Gesamtseiten."
+    totalPages: Int!
+    "Gesamtartikel."
+    totalItems: Int!
+}
+
+"""
+Warehouse Shipping Advice (WSA)-Dokument, das Tracking-Informationen zu einer CastleGate-Bestellung enthält.
+"""
+type WarehouseShippingAdvice {
+    "Artikel-ID der Bestellung."
+    fulfillmentOrderItemId: String!
+    "Datum und Uhrzeit des Warehouse Shipping Advice."
+    warehouseShippingAdviceDate: DateTime
+    "Bestellanfrage-ID (fulfillmentOrderRequestId), die von der Mutation `createFulfillmentOrder` zurückgegeben wurde."
+    fulfillmentOrderRequestId: String
+    "Bestellnummer."
+    fulfillmentPurchaseOrderNumber: String
+    "Die Lieferanten-ID der Bestellung."
+    supplierId: Int
+    "Einzelhändler der Bestellung."
+    retailer: FulfillmentOrderRetailer!
+    "Produktdetails der Bestellung."
+    productDetails: FulfillmentOrderItem
+    "Versanddetails."
+    shippingDetails: FulfillmentOrderShippingDetails
+    "Tracking-Details."
+    tracking: FulfillmentOrderTracking
+}
+
+"""
+Versanddetails der Bestellung.
+"""
+type FulfillmentOrderShippingDetails {
+    "Versandadresse."
+    shippingAddress: FulfillmentOrderShippingAddress
+    "Absenderadresse."
+    shippingFromAddress: FulfillmentOrderShippingAddress
+    "Lagerhausdetails."
+    warehouse: FulfillmentOrderWarehouse
+}
+
+"""
+Tracking-Details der Bestellung.
+"""
+type FulfillmentOrderTracking {
+    "Frachtführer."
+    carrier: String
+    "Standard Carrier Alpha Code zur Identifizierung von Transportunternehmen."
+    carrierScac: String
+    "Voraussichtliches Versanddatum."
+    expectedShippingDate: DateTime
+    "Versanddatum."
+    shippingDate: DateTime
+    "Versandgeschwindigkeit."
+    shipSpeed: String
+    "Versandgeschwindigkeitscode."
+    shipSpeedCode: String
+    "Sendungsverfolgungsnummern."
+    trackingNumbers: [String!]
+}
+
+"""
+Lagerhausdetails der Bestellung.
+"""
+type FulfillmentOrderWarehouse {
+    "Lagerhaus-ID."
+    warehouseId: Int
+    "Name des Lagerhauses."
+    name: String
+}
+
+"""
+Seite mit einer Liste von CastleGate-Fulfillment-Bestelldetails.
+"""
+type FulfillmentOrderDetailsPagedConnection {
+    "Seiteninformationen."
+    pageInfo: FulfillmentDataPageInfo
+    "Liste der CastleGate-Fulfillment-Bestelldetails."
+    nodes: [FulfillmentOrderDetails!]!
+}
+
+input FulfillmentOrderDetailsListInput {
+    "Die Wayfair-Lieferanten-ID der Bestellung"
+    supplierId: Int!
+    "Status einer Fulfillment-Bestellung"
+    status: [FulfillmentOrderStatus!]
+    "Einzelhändlerobjekt mit Einzelhändlerbezogenen IDs zum Filtern von Bestellungen"
+    retailer: FulfillmentOrderDetailsListRetailerInput
+    "Optionale Datumsintervallfilterung für das Erstellungsdatum der Bestellung bei Wayfair."
+    orderCreationDateInterval: FulfillmentOrderDateInterval @DateInterval(
+        message: "Ungültiges orderCreationDateInterval. Der Wert des Feldes 'to' : ${validatedValue.to} muss nach dem Wert des Feldes 'from' : ${validatedValue.from} liegen."
+    )
+    """
+    Optionaler Datumsintervallfilter, um Fulfillment-Bestellungen abzurufen, deren Datum im letzten Versanddatum liegt.
+    """
+    shippingDateInterval: FulfillmentOrderDateInterval @DateInterval(
+        message: "Ungültiges shippingDateInterval. Der Wert des Feldes 'to' : ${validatedValue.to} muss nach dem Wert des Feldes 'from' : ${validatedValue.from} liegen."
+    )
+    "Optionale Datumsintervallfilterung für das erwartete Versanddatum von Bestellungen."
+    expectedShippingDateInterval: FulfillmentOrderDateInterval @DateInterval(
+        message: "Ungültiges expectedShippingDateInterval. Der Wert des Feldes 'to' : ${validatedValue.to} muss nach dem Wert des Feldes 'from' : ${validatedValue.from} liegen."
+    )
+    "Sortieroptionen für die Bestelldatenliste"
+    sortOption: FulfillmentOrderSortOption
+    "Seitengröße"
+    pageSize: Int = 10 @Range(min: 1, max: 25)
+    "Seitenindex"
+    page: Int = 1 @Range(min: 1)
+}
+
+"""
+Eingabetyp für Einzelhändlerbezogene Datenfelder
+"""
+input FulfillmentOrderDetailsListRetailerInput {
+    "Liste der Einzelhändler-IDs zum Filtern"
+    retailerIds: [String!]
+    "Liste der Einzelhändler-Bestellnummern zum Filtern"
+    orderNumbers: [String!]
+}
+
+"""
+Eingabetyp für Datumsintervall
+"""
+input FulfillmentOrderDateInterval {
+    "Von (Beginn) Datum und Zeit, ISO 8601 Standard"
+    from: DateTime
+    "Bis (Ende) Datum und Zeit, ISO 8601 Standard"
+    to: DateTime
+}
+
+"""
+Eingabetyp für Sortieroptionen für die Fulfillment-Bestelldatenliste
+"""
+input FulfillmentOrderSortOption {
+    "Sortieren nach Feld"
+    sortBy: FulfillmentOrderDetailsListSortBy! = ORDER_CREATION_DATE
+    "Sortierreihenfolge"
+    sortOrder: OrderFulfillmentSortOrder! = DESC
+}
+
+"""
+Enum für verfügbare Felder zum Sortieren
+"""
+enum FulfillmentOrderDetailsListSortBy {
+    "Erstellungsdatum der Bestellung"
+    ORDER_CREATION_DATE
+    "Versanddatum einer VERSANDTEN Bestellung"
+    SHIPPING_DATE
+    "Erwartetes Versanddatum einer Bestellung"
+    EXPECTED_SHIPPING_DATE
+}
+
+"""
+Verschiedene Fulfillment-Bestellstatus
+"""
+enum FulfillmentOrderStatus {
+    "Die Bestellanfrage wurde erfolgreich empfangen (sowohl syntaktisch als auch semantisch überprüft)."
+    PENDING
+    "Die Bestellung wurde erfolgreich bestätigt und im CastleGate-Fulfillmentsystem von Wayfair erstellt, aber es fehlen möglicherweise noch einige Fulfillment-Validierungsprüfungen."
+    NEW
+    "Die Fulfillment-Bestellung wurde validiert. Alle Artikel der Bestellung wurden aus dem Lagerbestand zugewiesen. Wenn ein Artikel noch nicht zugewiesen wurde, bleibt der Bestellstatus auf NEW, bis alle Artikel zugewiesen sind."
+    ALLOCATED
+    "Einige Artikel der Bestellung wurden versendet."
+    PARTIALLY_SHIPPED
+    "Alle Artikel der Bestellung wurden versendet."
+    SHIPPED
+    "Die Bestellung wurde aufgrund von Fehlern abgelehnt. Fehlerdetails finden Sie im Typ `FulfillmentOrderDetails` über die Abfragen `fulfillmentOrderDetails` oder `fulfillmentOrderDetailsList`."
+    REJECTED
+    "Die Bestellung wurde zurückgestellt."
+    ON_HOLD
+    "Die Bestellung wurde storniert."
+    CANCELLED
+}
