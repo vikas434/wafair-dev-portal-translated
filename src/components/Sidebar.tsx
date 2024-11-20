@@ -49,7 +49,12 @@ export default function Sidebar({ currentPage, onNavigate, currentLanguage }: Si
       label: 'Multi Channel API',
       children: [
         { id: 'mc-order-api', label: 'Overview' },
-        { id: 'mc-graphql-docs', label: 'GraphQL Docs', link: `/public/${currentLanguage}/` },
+        { 
+          id: 'mc-graphql-docs', 
+          label: 'GraphQL Docs', 
+          link: window.location.hostname.includes('localhost')
+              ? `/public/${currentLanguage}/`
+              : `/${currentLanguage}/`,
       ]
     }
   ];
