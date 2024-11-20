@@ -21,43 +21,44 @@ export default function Sidebar({ currentPage, onNavigate, currentLanguage }: Si
   const [expandedSections, setExpandedSections] = React.useState<string[]>(['getting-started']);
 
   const navigation: NavItem[] = [
-    {
-      id: 'getting-started',
-      label: 'Getting Started',
-      children: [
-        { id: 'introduction', label: 'Introduction' },
-        { id: 'api-benefits', label: 'API and Its Benefits' },
-        { id: 'sandbox', label: 'Create Sandbox and Production Applications' },
-        { id: 'authentication', label: 'Authentication' },
-        { id: 'api-testing', label: 'API Testing' },
-      ]
-    },
-    {
-      id: 'developer-tools',
-      label: 'Developer Tools',
-      children: [
-        { id: 'app-management', label: 'Application Management' },
-        { id: 'graphql', label: 'GraphQL' },
-        { id: 'graphiql', label: 'GraphiQL' },
-        { id: 'postman', label: 'Using Postman' },
-        { id: 'integration-status', label: 'API Integration Status' },
-        { id: 'vetting', label: 'Vetting Page' },
-      ]
-    },
-    {
-      id: 'apis',
-      label: 'Multi Channel API',
-      children: [
-        { id: 'mc-order-api', label: 'Overview' },
-        { 
-          id: 'mc-graphql-docs', 
-          label: 'GraphQL Docs', 
-          link: window.location.hostname.includes('localhost')
-              ? `/public/${currentLanguage}/`
-              : `/${currentLanguage}/`,
-      ]
-    }
-  ];
+  {
+    id: 'getting-started',
+    label: 'Getting Started',
+    children: [
+      { id: 'introduction', label: 'Introduction' },
+      { id: 'api-benefits', label: 'API and Its Benefits' },
+      { id: 'sandbox', label: 'Create Sandbox and Production Applications' },
+      { id: 'authentication', label: 'Authentication' },
+      { id: 'api-testing', label: 'API Testing' },
+    ],
+  },
+  {
+    id: 'developer-tools',
+    label: 'Developer Tools',
+    children: [
+      { id: 'app-management', label: 'Application Management' },
+      { id: 'graphql', label: 'GraphQL' },
+      { id: 'graphiql', label: 'GraphiQL' },
+      { id: 'postman', label: 'Using Postman' },
+      { id: 'integration-status', label: 'API Integration Status' },
+      { id: 'vetting', label: 'Vetting Page' },
+    ],
+  },
+  {
+    id: 'apis',
+    label: 'Multi Channel API',
+    children: [
+      { id: 'mc-order-api', label: 'Overview' },
+      { 
+        id: 'mc-graphql-docs', 
+        label: 'GraphQL Docs', 
+        link: window.location.hostname.includes('localhost')
+          ? `/public/${currentLanguage}/`
+          : `/${currentLanguage}/`,
+      },
+    ],
+  },
+];
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => 
