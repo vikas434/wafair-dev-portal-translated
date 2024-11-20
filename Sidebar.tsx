@@ -52,9 +52,10 @@ export default function Sidebar({ currentPage, onNavigate, currentLanguage }: Si
         {
           id: 'mc-graphql-docs',
           label: 'GraphQL Docs',
-          link: process.env.NODE_ENV === 'production'
-            ? `/${currentLanguage}/`
-            : `/public/${currentLanguage}/`,
+          link:
+            window.location.hostname.includes('localhost')
+              ? `/public/${currentLanguage}/`
+              : `/${currentLanguage}/`,
         },
       ],
     }
