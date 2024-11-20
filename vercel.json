@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/public/:language/*", "destination": "/public/:language/index.html" }
-  ]
-}
